@@ -19,6 +19,15 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.effect.DropShadow;
+import javafx.animation.TranslateTransition;
+
 public class Main extends Application {
 
     private Stage stage;
@@ -59,22 +68,150 @@ private void showSplashScreen() {
     VBox content = new VBox(12);
     content.setAlignment(Pos.CENTER);
 
-    // Agriculture logo
-    StackPane logoBox = new StackPane();
+// ===============================
+//        AGRONOVA LOGO
+// ===============================
 
-    javafx.scene.shape.Circle logoCircle =
-            new javafx.scene.shape.Circle(58);
+StackPane logoBox = new StackPane();
+logoBox.setPrefSize(150, 150);
 
-    logoCircle.getStyleClass().add("logo-circle");
+// Outer circle
+Circle outerCircle = new Circle(62);
+outerCircle.setFill(Color.TRANSPARENT);
+outerCircle.setStroke(Color.web("#B7E4B1"));
+outerCircle.setStrokeWidth(3);
 
-    Label logo = new Label("🌾");
-    logo.getStyleClass().add("splash-logo");
+// Inner circle
+Circle innerCircle = new Circle(52);
+innerCircle.setFill(Color.web("#F7FFF5"));
+innerCircle.setStroke(Color.web("#4CAF50"));
+innerCircle.setStrokeWidth(2);
 
-    logoBox.getChildren().addAll(
-            logoCircle,
-            logo
-    );
+// A letter
+Label letterA = new Label("A");
+letterA.setFont(Font.font("Arial", FontWeight.BOLD, 58));
+letterA.setTextFill(Color.web("#1B5E20"));
 
+// Leaf on top of A
+Polygon leaf = new Polygon(
+        0, 0,
+        22, -12,
+        38, 4,
+        20, 20,
+        5, 15
+);
+
+leaf.setFill(Color.web("#66BB6A"));
+leaf.setRotate(-20);
+
+// Leaf vein
+Line leafLine = new Line(5, 10, 28, 3);
+leafLine.setStroke(Color.web("#2E7D32"));
+leafLine.setStrokeWidth(2);
+
+// Small crop lines
+Line cropLeft = new Line(-38, 30, -38, 15);
+cropLeft.setStroke(Color.web("#8BC34A"));
+cropLeft.setStrokeWidth(4);
+
+Line cropRight = new Line(38, 30, 38, 15);
+cropRight.setStroke(Color.web("#8BC34A"));
+cropRight.setStrokeWidth(4);
+
+// Small decorative dots
+Circle dot1 = new Circle(4, Color.web("#A5D6A7"));
+Circle dot2 = new Circle(3, Color.web("#81C784"));
+
+dot1.setTranslateX(-48);
+dot1.setTranslateY(-35);
+
+dot2.setTranslateX(48);
+dot2.setTranslateY(-25);
+// Add everything
+logoBox.getChildren().addAll(
+        outerCircle,
+        innerCircle,
+        letterA,
+        leaf,
+        leafLine,
+        cropLeft,
+        cropRight,
+        dot1,
+        dot2
+);
+
+// Shadow
+DropShadow shadow = new DropShadow();
+shadow.setRadius(18);
+shadow.setOffsetY(5);
+shadow.setColor(Color.rgb(0, 0, 0, 0.25));
+
+logoBox.setEffect(shadow);
+// ===============================
+//       LOGO ANIMATION
+// ===============================
+
+FadeTransition fade =
+        new FadeTransition(Duration.seconds(1.2), logoBox);
+
+fade.setFromValue(0);
+fade.setToValue(1);
+
+ScaleTransition scale =
+        new ScaleTransition(Duration.seconds(1.2), logoBox);
+
+scale.setFromX(0.6);
+scale.setFromY(0.6);
+
+scale.setToX(1.0);
+scale.setToY(1.0);
+
+
+// Small floating animation
+TranslateTransition move =
+        new TranslateTransition(Duration.seconds(2), logoBox);
+
+move.setFromY(0);
+move.setToY(-10);
+move.setAutoReverse(true);
+move.setCycleCount(TranslateTransition.INDEFINITE);
+
+
+// Start animations
+fade.play();
+scale.play();
+move.play();
+
+// ===============================
+//          LOGO ANIMATION
+// ===============================
+
+FadeTransition logoFade =
+        new FadeTransition(Duration.seconds(1.2), logoBox);
+
+logoFade.setFromValue(0);
+logoFade.setToValue(1);
+
+fade.setFromValue(0);
+fade.setToValue(1);
+
+ScaleTransition logoScale =
+        new ScaleTransition(Duration.seconds(1.2), logoBox);
+
+logoScale.setFromX(0.6);
+logoScale.setFromY(0.6);
+
+logoScale.setToX(1.0);
+logoScale.setToY(1.0);
+scale.setFromX(0.6);
+scale.setFromY(0.6);
+
+scale.setToX(1);
+scale.setToY(1);
+
+logoFade.play();
+logoScale.play();
+move.play();
     // Project name
     Label title = new Label("AgroNova");
     title.getStyleClass().add("splash-title");
@@ -172,9 +309,45 @@ private void showSplashScreen() {
         );
 
         // Logo
-        Label logo = new Label("🌾");
+      // AgroNova Logo
+StackPane welcomeLogo = new StackPane();
+welcomeLogo.setPrefSize(130, 130);
 
-        logo.setFont(Font.font(55));
+Circle outer = new Circle(55);
+outer.setFill(Color.TRANSPARENT);
+outer.setStroke(Color.web("#B7E4B1"));
+outer.setStrokeWidth(3);
+
+Circle inner = new Circle(46);
+inner.setFill(Color.web("#F7FFF5"));
+inner.setStroke(Color.web("#4CAF50"));
+inner.setStrokeWidth(2);
+
+Label aLetter = new Label("A");
+aLetter.setFont(Font.font("Arial", FontWeight.BOLD, 50));
+aLetter.setTextFill(Color.web("#1B5E20"));
+
+Polygon leaf = new Polygon(
+        0, 0,
+        20, -10,
+        34, 3,
+        18, 18,
+        4, 13
+);
+leaf.setFill(Color.web("#66BB6A"));
+leaf.setRotate(-20);
+
+Line leafVein = new Line(4, 9, 25, 3);
+leafVein.setStroke(Color.web("#2E7D32"));
+leafVein.setStrokeWidth(2);
+
+welcomeLogo.getChildren().addAll(
+        outer,
+        inner,
+        aLetter,
+        leaf,
+        leafVein
+);
 
         // Title
         Label title = new Label("AgroNova");
@@ -253,7 +426,7 @@ private void showSplashScreen() {
         );
 
         content.getChildren().addAll(
-            logo,
+            welcomeLogo,
             title,
             line,
             welcome,
@@ -264,7 +437,25 @@ private void showSplashScreen() {
 
 content.getStyleClass().add("welcome-card");
 
-logo.getStyleClass().add("agro-logo");
+welcomeLogo.getStyleClass().add("agro-logo");
+// Welcome Logo Animation
+FadeTransition welcomeFade =
+        new FadeTransition(Duration.seconds(1), welcomeLogo);
+
+welcomeFade.setFromValue(0);
+welcomeFade.setToValue(1);
+
+ScaleTransition welcomeScale =
+        new ScaleTransition(Duration.seconds(1), welcomeLogo);
+
+welcomeScale.setFromX(0.7);
+welcomeScale.setFromY(0.7);
+
+welcomeScale.setToX(1.0);
+welcomeScale.setToY(1.0);
+
+welcomeFade.play();
+welcomeScale.play();
 
 title.getStyleClass().add("agro-title");
 
