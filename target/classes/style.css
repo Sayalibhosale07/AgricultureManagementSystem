@@ -194,118 +194,433 @@
 /* ===============================
    DASHBOARD
    =============================== */
+/* ===============================
+AGRONOVA DASHBOARD
+=============================== */
 
 .dashboard {
-  -fx-background-color: #f5f9f5;
+  -fx-background-color: #f3f7f3;
 }
 
-.sidebar {
-  -fx-background-color: #e8f5e9;
-
-  -fx-padding: 20;
-}
+/* ===============================
+TOP BAR
+=============================== */
 
 .top-bar {
-  -fx-background-color: #1b5e20;
+  -fx-background-color: linear-gradient(to right, #073b2a, #116b45, #238b50);
 
-  -fx-padding: 18;
+  -fx-padding: 16 30 16 30;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 14, 0, 0, 4);
 }
+
+/* ===============================
+SIDEBAR
+=============================== */
+
+.sidebar {
+  -fx-background-color: #ffffff;
+
+  -fx-border-color: #dce8df;
+
+  -fx-border-width: 0 1 0 0;
+
+  -fx-padding: 28 16 20 16;
+}
+
+/* ===============================
+MENU TITLE
+=============================== */
+
+.menu-title {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 12px;
+
+  -fx-font-weight: bold;
+
+  -fx-text-fill: #72917b;
+
+  -fx-padding: 0 0 8 8;
+}
+
+/* ===============================
+MENU BUTTON
+=============================== */
+
+.menu-button {
+  -fx-background-color: transparent;
+
+  -fx-text-fill: #355d43;
+
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 13px;
+
+  -fx-font-weight: bold;
+
+  -fx-alignment: CENTER_LEFT;
+
+  -fx-background-radius: 12;
+
+  -fx-border-radius: 12;
+
+  -fx-border-color: transparent;
+
+  -fx-padding: 8 12 8 12;
+
+  -fx-cursor: hand;
+}
+
+.menu-button:hover {
+  -fx-background-color: #e5f4e8;
+
+  -fx-text-fill: #126b45;
+
+  -fx-translate-x: 4;
+
+  -fx-effect: dropshadow(gaussian, rgba(30, 100, 50, 0.15), 8, 0, 0, 2);
+}
+
+.menu-button:pressed {
+  -fx-background-color: #cce8d2;
+}
+
+/* ===============================
+LOGOUT BUTTON
+=============================== */
+
+.logout-button {
+  -fx-text-fill: #b44a4a;
+}
+
+.logout-button:hover {
+  -fx-background-color: #fff0f0;
+
+  -fx-text-fill: #a52f2f;
+}
+
+/* ===============================
+DASHBOARD CENTER
+=============================== */
+
+.dashboard-center {
+  -fx-background-color: #f3f7f3;
+
+  -fx-padding: 32 38 35 38;
+}
+
+/* ===============================
+WELCOME SECTION
+=============================== */
+
+.dashboard-welcome {
+  -fx-background-color: linear-gradient(to right, #e4f4e6, #f4faf4);
+
+  -fx-background-radius: 18;
+
+  -fx-border-color: #d4e8d7;
+
+  -fx-border-radius: 18;
+
+  -fx-border-width: 1;
+
+  -fx-padding: 20 24 20 24;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 10, 0, 0, 3);
+}
+
+/* ===============================
+DASHBOARD TITLE
+=============================== */
+
+.dashboard-title {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 27px;
+
+  -fx-font-weight: bold;
+
+  -fx-text-fill: #174f2e;
+}
+
+/* ===============================
+DASHBOARD SUBTITLE
+=============================== */
+
+.dashboard-subtitle {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 14px;
+
+  -fx-text-fill: #67806c;
+}
+
+/* ===============================
+SECTION TITLE
+=============================== */
+
+.section-title {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 19px;
+
+  -fx-font-weight: bold;
+
+  -fx-text-fill: #245c35;
+
+  -fx-padding: 4 0 0 2;
+}
+
+/* ===============================
+STATISTICS CARD
+=============================== */
+
+.stat-card {
+  -fx-background-color: white;
+
+  -fx-background-radius: 16;
+
+  -fx-border-color: #dce9de;
+
+  -fx-border-radius: 16;
+
+  -fx-border-width: 1;
+
+  -fx-padding: 15 17 15 17;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.09), 12, 0, 0, 4);
+}
+
+.stat-card:hover {
+  -fx-background-color: #fafffa;
+
+  -fx-border-color: #79b982;
+
+  -fx-translate-y: -4;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.17), 16, 0, 0, 6);
+}
+
+/* ===============================
+STAT ICON
+=============================== */
+
+.stat-icon {
+  -fx-font-size: 23px;
+}
+
+/* ===============================
+STAT TITLE
+=============================== */
+
+.stat-title {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 13px;
+
+  -fx-font-weight: bold;
+
+  -fx-text-fill: #58705e;
+}
+
+/* ===============================
+STAT VALUE
+=============================== */
+
+.stat-value {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 25px;
+
+  -fx-font-weight: bold;
+
+  -fx-text-fill: #176b45;
+}
+
+/* ===============================
+STAT DESCRIPTION
+=============================== */
+
+.stat-description {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 10px;
+
+  -fx-text-fill: #8a9b8d;
+}
+
+/* ===============================
+MANAGEMENT CARDS
+=============================== */
+
+.management-card {
+  -fx-background-color: white;
+
+  -fx-background-radius: 16;
+
+  -fx-border-color: #dce9de;
+
+  -fx-border-radius: 16;
+
+  -fx-border-width: 1;
+
+  -fx-padding: 17;
+
+  -fx-cursor: hand;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 12, 0, 0, 4);
+}
+
+.management-card:hover {
+  -fx-background-color: #f8fff9;
+
+  -fx-border-color: #66ad70;
+
+  -fx-translate-y: -4;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 17, 0, 0, 6);
+}
+
+/* ===============================
+MANAGEMENT ICON
+=============================== */
+
+.management-icon {
+  -fx-font-size: 28px;
+}
+
+/* ===============================
+MANAGEMENT TITLE
+=============================== */
+
+.management-title {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 15px;
+
+  -fx-font-weight: bold;
+
+  -fx-text-fill: #195a31;
+}
+
+/* ===============================
+MANAGEMENT DESCRIPTION
+=============================== */
+
+.management-description {
+  -fx-font-family: "Arial";
+
+  -fx-font-size: 11px;
+
+  -fx-text-fill: #708275;
+}
+
+/* ===============================
+BUTTON FOCUS FIX
+=============================== */
+
+.button:focused {
+  -fx-focus-color: transparent;
+
+  -fx-faint-focus-color: transparent;
+}
+
 /* =================================
    AGRONOVA SPLASH SCREEN
    ================================= */
 
 .splash-page {
-    -fx-background-color:
-        linear-gradient(
-            to bottom right,
-            #0b3d2e,
-            #176b45,
-            #4d9b55
-        );
+  -fx-background-color: linear-gradient(
+    to bottom right,
+    #0b3d2e,
+    #176b45,
+    #4d9b55
+  );
 }
 
 /* Decorative background circles */
 
 .splash-circle-light {
-    -fx-fill: rgba(255,255,255,0.06);
-    -fx-translate-x: 430;
-    -fx-translate-y: -250;
+  -fx-fill: rgba(255, 255, 255, 0.06);
+  -fx-translate-x: 430;
+  -fx-translate-y: -250;
 }
 
 .splash-circle-dark {
-    -fx-fill: rgba(0,0,0,0.06);
-    -fx-translate-x: -430;
-    -fx-translate-y: 270;
+  -fx-fill: rgba(0, 0, 0, 0.06);
+  -fx-translate-x: -430;
+  -fx-translate-y: 270;
 }
 
 /* Logo */
 
 .logo-circle {
-    -fx-fill: rgba(255,255,255,0.15);
+  -fx-fill: rgba(255, 255, 255, 0.15);
 
-    -fx-stroke: rgba(255,255,255,0.35);
+  -fx-stroke: rgba(255, 255, 255, 0.35);
 
-    -fx-stroke-width: 2;
+  -fx-stroke-width: 2;
 }
 
 .splash-logo {
-    -fx-font-size: 55px;
+  -fx-font-size: 55px;
 }
 
 /* AgroNova title */
 
 .splash-title {
-    -fx-font-family: "Arial";
+  -fx-font-family: "Arial";
 
-    -fx-font-size: 52px;
+  -fx-font-size: 52px;
 
-    -fx-font-weight: bold;
+  -fx-font-weight: bold;
 
-    -fx-text-fill: white;
+  -fx-text-fill: white;
 }
 
 /* Small heading */
 
 .splash-tagline {
-    -fx-font-family: "Arial";
+  -fx-font-family: "Arial";
 
-    -fx-font-size: 13px;
+  -fx-font-size: 13px;
 
-    -fx-font-weight: bold;
+  -fx-font-weight: bold;
 
-    -fx-text-fill: #d8f0d5;
+  -fx-text-fill: #d8f0d5;
 
-    -fx-letter-spacing: 3px;
+  -fx-letter-spacing: 3px;
 }
 
 /* Main tagline */
 
 .splash-description {
-    -fx-font-family: "Arial";
+  -fx-font-family: "Arial";
 
-    -fx-font-size: 19px;
+  -fx-font-size: 19px;
 
-    -fx-font-weight: bold;
+  -fx-font-weight: bold;
 
-    -fx-text-fill: white;
+  -fx-text-fill: white;
 
-    -fx-padding: 5 0 12 0;
+  -fx-padding: 5 0 12 0;
 }
 
 /* Loading text */
 
 .splash-loading {
-    -fx-font-size: 12px;
+  -fx-font-size: 12px;
 
-    -fx-text-fill: #d2ead4;
+  -fx-text-fill: #d2ead4;
 }
 
 /* Progress bar */
 
 .splash-progress {
-    -fx-accent: white;
+  -fx-accent: white;
 
-    -fx-background-radius: 10;
+  -fx-background-radius: 10;
 
-    -fx-border-radius: 10;
+  -fx-border-radius: 10;
 }

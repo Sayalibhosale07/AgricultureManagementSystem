@@ -38,7 +38,7 @@ public class Main extends Application {
 
         showSplashScreen();
 
-        stage.setTitle("AgroNova - Agriculture Management System");
+        stage.setTitle("AgroNova - Agriculture  Management  System");
         stage.setWidth(1000);
         stage.setHeight(650);
         stage.setResizable(false);

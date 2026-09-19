@@ -8,497 +8,606 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
+import javafx.scene.control.ScrollPane;
 public class Dashboard {
 
-    private Stage stage;
+private Stage stage;
 
-    // ================= DASHBOARD =================
+// ================= DASHBOARD =================
 
-    public void show(Stage stage) {
+public void show(Stage stage) {
 
-        this.stage = stage;
+    this.stage = stage;
 
-        BorderPane root = new BorderPane();
+    BorderPane root = new BorderPane();
 
-        root.setStyle(
-            "-fx-background-color: #f4f8f4;"
-        );
+    root.getStyleClass().add("dashboard");
 
-        // ================= TOP BAR =================
+    // ================= TOP BAR =================
 
-        HBox topBar = new HBox();
+    HBox topBar = new HBox();
 
-        topBar.setAlignment(Pos.CENTER_LEFT);
-        topBar.setSpacing(20);
-        topBar.setPadding(
-            new Insets(15, 25, 15, 25)
-        );
+    topBar.getStyleClass().add("top-bar");
 
-        topBar.setStyle(
-            "-fx-background-color: #14532d;"
-        );
+    topBar.setAlignment(Pos.CENTER_LEFT);
+    topBar.setSpacing(18);
+    topBar.setPadding(
+        new Insets(14, 25, 14, 25)
+    );
 
-        Label logo = new Label("🌿 AgroNova");
+    Label logo = new Label("🌿");
 
-        logo.setFont(
-            Font.font(
-                "Arial",
-                FontWeight.BOLD,
-                25
-            )
-        );
+    logo.setFont(
+        Font.font("Arial", 28)
+    );
 
-        logo.setTextFill(Color.WHITE);
+    Label brand = new Label("AgroNova");
 
-        Label title = new Label(
-            "Agriculture Management System"
-        );
+    brand.setFont(
+        Font.font(
+            "Arial",
+            FontWeight.BOLD,
+            24
+        )
+    );
 
-        title.setFont(
-            Font.font("Arial", 17)
-        );
+    brand.setTextFill(Color.WHITE);
 
-        title.setTextFill(
-            Color.web("#d8f3dc")
-        );
+    Label subtitle = new Label(
+        "Agriculture Management System"
+    );
 
-        topBar.getChildren().addAll(
-            logo,
-            title
-        );
+    subtitle.setFont(
+        Font.font("Arial", 13)
+    );
 
-        // ================= SIDEBAR =================
+    subtitle.setTextFill(
+        Color.web("#d8f3dc")
+    );
 
-        VBox sidebar = new VBox(10);
+    VBox brandBox = new VBox(2);
 
-        sidebar.setPadding(
-            new Insets(25, 15, 20, 15)
-        );
+    brandBox.getChildren().addAll(
+        brand,
+        subtitle
+    );
 
-        sidebar.setPrefWidth(235);
+    Region topSpacer = new Region();
 
-        sidebar.setStyle(
-            "-fx-background-color: #e8f5e9;"
-        );
+    HBox.setHgrow(
+        topSpacer,
+        Priority.ALWAYS
+    );
 
-        Label menuTitle = new Label("MAIN MENU");
+    Label userIcon = new Label("👤");
 
-        menuTitle.setFont(
-            Font.font(
-                "Arial",
-                FontWeight.BOLD,
-                13
-            )
-        );
+    userIcon.setFont(
+        Font.font("Arial", 22)
+    );
 
-        menuTitle.setTextFill(
-            Color.web("#388e3c")
-        );
+    Label userText = new Label("Admin");
 
-        Button farmer =
-            createMenuButton("👨‍🌾  Farmer Management");
-        farmer.setOnAction(event -> {
+    userText.setFont(
+        Font.font(
+            "Arial",
+            FontWeight.BOLD,
+            14
+        )
+    );
+
+    userText.setTextFill(Color.WHITE);
+
+    HBox userBox = new HBox(8);
+
+    userBox.setAlignment(
+        Pos.CENTER
+    );
+
+    userBox.getChildren().addAll(
+        userIcon,
+        userText
+    );
+
+    topBar.getChildren().addAll(
+        logo,
+        brandBox,
+        topSpacer,
+        userBox
+    );
+
+    // ================= SIDEBAR =================
+
+    VBox sidebar = new VBox(10);
+
+    sidebar.getStyleClass().add("sidebar");
+
+    sidebar.setPadding(
+        new Insets(25, 15, 20, 15)
+    );
+
+    sidebar.setPrefWidth(235);
+
+    Label menuTitle = new Label(
+        "MAIN MENU" );
+        menuTitle.getStyleClass().add("menu-title");
+
+    menuTitle.setFont(
+        Font.font(
+            "Arial",
+            FontWeight.BOLD,
+            13
+        )
+    );
+
+    menuTitle.setTextFill(
+        Color.web("#388e3c")
+    );
+
+    // ================= MENU BUTTONS =================
+
+    Button farmer =
+        createMenuButton("👨‍🌾  Farmer Management");
+
+    farmer.setOnAction(event -> {
+
         FarmerManagement farmerManagement =
-        new FarmerManagement();
+            new FarmerManagement();
 
         farmerManagement.show(stage);
-        });
-        
-        Button crop =
-            createMenuButton("🌱  Crop Management");
-            crop.setOnAction(event -> {
-            CropManagement cropManagement = new CropManagement();
-            cropManagement.show(stage);
-        });
+    });
 
-        Button fertilizer =
-            createMenuButton("🧪  Fertilizer Management");
-            fertilizer.setOnAction(event -> {
-            FertilizerManagement fertilizerManagement =
+
+    Button crop =
+        createMenuButton("🌱  Crop Management");
+
+    crop.setOnAction(event -> {
+
+        CropManagement cropManagement =
+            new CropManagement();
+
+        cropManagement.show(stage);
+    });
+
+
+    Button fertilizer =
+        createMenuButton("🧪  Fertilizer Management");
+
+    fertilizer.setOnAction(event -> {
+
+        FertilizerManagement fertilizerManagement =
             new FertilizerManagement();
 
-            fertilizerManagement.show(stage);
-        });
-        Button equipment =
-            createMenuButton("🚜  Equipment Management");
-            equipment.setOnAction(event -> {
-            EquipmentManagement equipmentManagement =
+        fertilizerManagement.show(stage);
+    });
+
+
+    Button equipment =
+        createMenuButton("🚜  Equipment Management");
+
+    equipment.setOnAction(event -> {
+
+        EquipmentManagement equipmentManagement =
             new EquipmentManagement();
 
-            equipmentManagement.show(stage);
-        });
+        equipmentManagement.show(stage);
+    });
 
-        Button market =
-            createMenuButton("🛒  Market Management");
-            market.setOnAction(event -> {
-            MarketManagement marketManagement =
+
+    Button market =
+        createMenuButton("🛒  Market Management");
+
+    market.setOnAction(event -> {
+
+        MarketManagement marketManagement =
             new MarketManagement();
 
-            marketManagement.show(stage);
-        });
+        marketManagement.show(stage);
+    });
 
-        Button reports =
-            createMenuButton("📊  Reports");
-            reports.setOnAction(event -> {
-            Reports reportsScreen = new Reports();
-            reportsScreen.show(stage);
-        });
 
-        Button profile =
-            createMenuButton("👤  Profile / Settings");
-            profile.setOnAction(event -> {
-            ProfileSettings profileSettings = new ProfileSettings();
-             profileSettings.show(stage);
-        });
-        Button logout =
-            createMenuButton("🚪  Logout");
-           logout.setOnAction(event -> {
-           Main main = new Main();
-           main.start(stage);
-        });
+    Button reports =
+        createMenuButton("📊  Reports");
 
+    reports.setOnAction(event -> {
+
+        Reports reportsScreen =
+            new Reports();
+
+        reportsScreen.show(stage);
+    });
+
+
+    Button profile =
+        createMenuButton("👤  Profile / Settings");
+
+    profile.setOnAction(event -> {
+
+        ProfileSettings profileSettings =
+            new ProfileSettings();
+
+        profileSettings.show(stage);
+    });
+
+
+    Button logout =
+        createMenuButton("🚪  Logout");
+
+    logout.setOnAction(event -> {
+
+        Main main = new Main();
+
+        main.start(stage);
+    });
+
+
+    sidebar.getChildren().addAll(
+        menuTitle,
+        farmer,
+        crop,
+        fertilizer,
+        equipment,
+        market,
+        reports,
+        profile,
+        logout
+    );
+
+    // ================= CENTER =================
+
+    VBox center = new VBox(20);
+
+    center.getStyleClass().add(
+        "dashboard-center"
+    );
+    ScrollPane scrollPane = new ScrollPane();
+
+scrollPane.setContent(center);
+scrollPane.setFitToWidth(true);
+scrollPane.setHbarPolicy(
+    ScrollPane.ScrollBarPolicy.NEVER
+);
+scrollPane.setVbarPolicy(
+    ScrollPane.ScrollBarPolicy.AS_NEEDED
+);
+
+scrollPane.getStyleClass().add(
+    "dashboard-scroll"
+);
+
+    center.setPadding(
+        new Insets(30, 35, 30, 35)
+    );
+
+    // ================= WELCOME =================
+
+    Label welcome = new Label(
+        "Welcome to AgroNova 🌾"
+    );
+
+    welcome.getStyleClass().add(
+        "dashboard-title"
+    );
+
+    Label message = new Label(
+        "Manage your agricultural activities from one place."
+    );
+
+    message.getStyleClass().add(
+        "dashboard-subtitle"
+    );
+
+    VBox welcomeBox = new VBox(6);
+    welcomeBox.getStyleClass().add("dashboard-welcome");
+
+    welcomeBox.getChildren().addAll(
+        welcome,
+        message
+    );
+
+    // ================= OVERVIEW =================
+
+    Label overviewTitle =
+        new Label("Dashboard Overview");
+
+    overviewTitle.getStyleClass().add(
+        "section-title"
+    );
+
+    // ================= STATISTICS =================
+
+    HBox statistics = new HBox(18);
+
+    statistics.setAlignment(
+        Pos.CENTER_LEFT
+    );
+
+    statistics.getChildren().addAll(
+
+        createStatCard(
+            "👨‍🌾",
+            "Farmers",
+            "25"
+        ),
+
+        createStatCard(
+            "🌱",
+            "Crops",
+            "18"
+        ),
+
+        createStatCard(
+            "🚜",
+            "Equipment",
+            "12"
+        ),
+
+        createStatCard(
+            "🛒",
+            "Market Items",
+            "20"
+        )
+    );
+
+    // ================= QUICK MANAGEMENT =================
+
+    Label quickTitle =
+        new Label("Quick Management");
+
+    quickTitle.getStyleClass().add(
+        "section-title"
+    );
+
+    GridPane cards = new GridPane();
+
+    cards.setHgap(18);
+    cards.setVgap(18);
+
+    cards.add(
+        createCard(
+            "👨‍🌾",
+            "Farmer Management",
+            "Add and manage farmer information"
+        ),
+        0, 0
+    );
+
+    cards.add(
+        createCard(
+            "🌱",
+            "Crop Management",
+            "Manage crops and cultivation details"
+        ),
+        1, 0
+    );
+
+    cards.add(
+        createCard(
+            "🧪",
+            "Fertilizer Management",
+            "Manage fertilizer records"
+        ),
+        0, 1
+    );
+
+    cards.add(
+        createCard(
+            "🚜",
+            "Equipment Management",
+            "Manage agricultural equipment"
+        ),
+        1, 1
+    );
+
+    cards.add(
+        createCard(
+            "🛒",
+            "Market Management",
+            "Manage crop market information"
+        ),
+        2, 0
+    );
+
+    cards.add(
+        createCard(
+            "📊",
+            "Reports",
+            "View agricultural reports"
+        ),
+        2, 1
+    );
+
+    center.getChildren().addAll(
+        welcomeBox,
+        overviewTitle,
+        statistics,
+        quickTitle,
+        cards
+    );
+
+    // ================= ROOT =================
+
+    root.setTop(topBar);
+    root.setLeft(sidebar);
+    root.setCenter(scrollPane);
+
+    // ================= SCENE =================
+Scene scene =
+    new Scene(root, 1200, 750);
+
+scene.getStylesheets().add(
+    getClass().getResource("/style.css").toExternalForm()
+);
+
+stage.setScene(scene);
+
+    stage.setTitle(
+        "AgroNova - Dashboard"
+    );
+
+    stage.show();
+}
+
+// ================= STAT CARD =================
+
+private VBox createStatCard(
+    String icon,
+    String title,
+    String value
+) {
+
+    VBox card = new VBox(5);
+
+    card.getStyleClass().add(
+        "stat-card"
+    );
+
+    card.setPrefSize(
+        185,
+        105
+    );
+
+    card.setAlignment(
+        Pos.CENTER_LEFT
+    );
+
+    Label iconLabel =
+        new Label(icon);
+        iconLabel.getStyleClass().add("stat-icon");
         
 
-        sidebar.getChildren().addAll(
-            menuTitle,
-            farmer,
-            crop,
-            fertilizer,
-            equipment,
-            market,
-            reports,
-            profile,
-            logout
-        );
-
-        // ================= CENTER =================
-
-        VBox center = new VBox(20);
-
-        center.setPadding(
-            new Insets(30)
-        );
-
-        // Welcome heading
-
-        Label welcome = new Label(
-            "Welcome to AgroNova 🌾"
-        );
-
-        welcome.setFont(
-            Font.font(
-                "Arial",
-                FontWeight.BOLD,
-                30
-            )
-        );
-
-        welcome.setTextFill(
-            Color.web("#1b5e20")
-        );
-
-        Label message = new Label(
-            "Manage your agricultural activities from one place."
-        );
-
-        message.setFont(
-            Font.font("Arial", 16)
-        );
-
-        message.setTextFill(
-            Color.web("#607d64")
-        );
-
-        // ================= STATISTICS =================
-
-        HBox statistics = new HBox(15);
-
-        statistics.getChildren().addAll(
-            createStatCard("👨‍🌾", "Farmers", "25"),
-            createStatCard("🌱", "Crops", "18"),
-            createStatCard("🚜", "Equipment", "12"),
-            createStatCard("🛒", "Market Items", "20")
-        );
-
-        // ================= SECTION TITLE =================
-
-        Label quickTitle =
-            new Label("Quick Management");
-
-        quickTitle.setFont(
-            Font.font(
-                "Arial",
-                FontWeight.BOLD,
-                21
-            )
-        );
-
-        quickTitle.setTextFill(
-            Color.web("#245c35")
-        );
-
-        // ================= MANAGEMENT CARDS =================
-
-        GridPane cards = new GridPane();
-
-        cards.setHgap(18);
-        cards.setVgap(18);
-
-        cards.add(
-            createCard(
-                "👨‍🌾",
-                "Farmer Management",
-                "Add and manage farmer information"
-            ),
-            0, 0
-        );
-
-        cards.add(
-            createCard(
-                "🌱",
-                "Crop Management",
-                "Manage crops and cultivation details"
-            ),
-            1, 0
-        );
-
-        cards.add(
-            createCard(
-                "🧪",
-                "Fertilizer Management",
-                "Manage fertilizer records"
-            ),
-            0, 1
-        );
-
-        cards.add(
-            createCard(
-                "🚜",
-                "Equipment Management",
-                "Manage agricultural equipment"
-            ),
-            1, 1
-        );
-
-        cards.add(
-            createCard(
-                "🛒",
-                "Market Management",
-                "Manage crop market information"
-            ),
-            2, 0
-        );
-
-        cards.add(
-            createCard(
-                "📊",
-                "Reports",
-                "View agricultural reports"
-            ),
-            2, 1
-        );
-
-        center.getChildren().addAll(
-            welcome,
-            message,
-            statistics,
-            quickTitle,
-            cards
-        );
-
-        // ================= ROOT =================
-
-        root.setTop(topBar);
-        root.setLeft(sidebar);
-        root.setCenter(center);
-
-        // ================= SCENE =================
-
-        Scene scene =
-            new Scene(root, 1200, 750);
-
-        stage.setScene(scene);
-
-        stage.setTitle(
-            "AgroNova - Dashboard"
-        );
-
-        stage.show();
-    }
-
-    // ================= STAT CARD =================
-
-    private VBox createStatCard(
-        String icon,
-        String title,
-        String value
-    ) {
-
-        VBox card = new VBox(6);
-
-        card.setPrefSize(180, 90);
-
-        card.setPadding(
-            new Insets(12)
-        );
-
-        card.setAlignment(
-            Pos.CENTER_LEFT
-        );
-
-        card.setStyle(
-            "-fx-background-color: white;" +
-            "-fx-background-radius: 14;" +
-            "-fx-border-color: #d7ead8;" +
-            "-fx-border-radius: 14;" +
-            "-fx-effect: dropshadow(" +
-            "gaussian, rgba(0,0,0,0.10), 8, 0, 0, 3);"
-        );
-
-        Label iconLabel =
-            new Label(icon);
-
-        iconLabel.setFont(
-            Font.font("Arial", 22)
-        );
-
-        Label titleLabel =
-            new Label(title);
-
-        titleLabel.setTextFill(
-            Color.web("#607d64")
-        );
-
-        titleLabel.setFont(
-            Font.font("Arial", 13)
-        );
-
-        Label valueLabel =
-            new Label(value);
-
-        valueLabel.setFont(
-            Font.font(
-                "Arial",
-                FontWeight.BOLD,
-                22
-            )
-        );
-
-        valueLabel.setTextFill(
-            Color.web("#1b5e20")
-        );
-
-        card.getChildren().addAll(
-            iconLabel,
-            titleLabel,
-            valueLabel
-        );
-
-        return card;
-    }
-
-    // ================= MANAGEMENT CARD =================
-
-    private VBox createCard(
-        String icon,
-        String title,
-        String description
-    ) {
-
-        VBox card = new VBox(8);
-
-        card.setPrefSize(220, 125);
-
-        card.setPadding(
-            new Insets(18)
-        );
-
-        card.setAlignment(
-            Pos.CENTER_LEFT
-        );
-
-        card.setStyle(
-            "-fx-background-color: white;" +
-            "-fx-background-radius: 16;" +
-            "-fx-border-color: #c8e6c9;" +
-            "-fx-border-radius: 16;" +
-            "-fx-border-width: 1;" +
-            "-fx-effect: dropshadow(" +
-            "gaussian, rgba(0,0,0,0.12), 10, 0, 0, 3);"
-        );
-
-        Label iconLabel =
-            new Label(icon);
-
-        iconLabel.setFont(
-            Font.font("Arial", 27)
-        );
-
-        Label titleLabel =
-            new Label(title);
-
-        titleLabel.setFont(
-            Font.font(
-                "Arial",
-                FontWeight.BOLD,
-                16
-            )
-        );
-
-        titleLabel.setTextFill(
-            Color.web("#1b5e20")
-        );
-
-        Label descriptionLabel =
-            new Label(description);
-
-        descriptionLabel.setWrapText(true);
-
-        descriptionLabel.setFont(
-            Font.font("Arial", 12)
-        );
-
-        descriptionLabel.setTextFill(
-            Color.web("#607d64")
-        );
-
-        card.getChildren().addAll(
-            iconLabel,
-            titleLabel,
-            descriptionLabel
-        );
-
-        return card;
-    }
-
-    // ================= MENU BUTTON =================
-
-    private Button createMenuButton(
-        String text
-    ) {
-
-        Button button =
-            new Button(text);
-
-        button.setPrefWidth(205);
-        button.setPrefHeight(44);
-
-        button.setStyle(
-            "-fx-background-color: white;" +
-            "-fx-text-fill: #1b5e20;" +
-            "-fx-font-size: 13px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-alignment: CENTER_LEFT;" +
-            "-fx-background-radius: 10;" +
-            "-fx-cursor: hand;"
-        );
-
-        return button;
-    }
+    iconLabel.setFont(
+        Font.font(
+            "Arial",
+            23
+        )
+    );
+
+    Label titleLabel =
+        new Label(title);
+
+    titleLabel.setFont(
+        Font.font(
+            "Arial",
+            13
+        )
+    );
+
+    titleLabel.setTextFill(
+        Color.web("#607d64")
+    );
+
+    Label valueLabel =
+        new Label(value);
+
+    valueLabel.setFont(
+        Font.font(
+            "Arial",
+            FontWeight.BOLD,
+            23
+        )
+    );
+
+    valueLabel.setTextFill(
+        Color.web("#1b5e20")
+    );
+
+    card.getChildren().addAll(
+        iconLabel,
+        titleLabel,
+        valueLabel
+    );
+
+    return card;
+}
+
+// ================= MANAGEMENT CARD =================
+
+private VBox createCard(
+    String icon,
+    String title,
+    String description
+) {
+
+    VBox card = new VBox(8);
+
+    card.getStyleClass().add(
+        "management-card"
+    );
+
+    card.setPrefSize(
+        225,
+        130
+    );
+
+    Label iconLabel =
+        new Label(icon);
+        iconLabel.getStyleClass().add("management-icon");
+
+    iconLabel.setFont(
+        Font.font(
+            "Arial",
+            28
+        )
+    );
+
+    Label titleLabel =
+        new Label(title);
+
+    titleLabel.setFont(
+        Font.font(
+            "Arial",
+            FontWeight.BOLD,
+            16
+        )
+    );
+
+    titleLabel.setTextFill(
+        Color.web("#1b5e20")
+    );
+
+    Label descriptionLabel =
+        new Label(description);
+
+    descriptionLabel.setWrapText(true);
+
+    descriptionLabel.setFont(
+        Font.font(
+            "Arial",
+            12
+        )
+    );
+
+    descriptionLabel.setTextFill(
+        Color.web("#607d64")
+    );
+
+    card.getChildren().addAll(
+        iconLabel,
+        titleLabel,
+        descriptionLabel
+    );
+
+    return card;
+}
+
+// ================= MENU BUTTON =================
+
+private Button createMenuButton(String text) {
+
+    Button button = new Button(text);
+
+    button.getStyleClass().add("menu-button");
+
+    button.setPrefWidth(205);
+    button.setPrefHeight(44);
+
+    return button;
+}
 }
