@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -15,7 +16,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.scene.control.ScrollPane;
 public class Dashboard {
 
 private Stage stage;
@@ -369,60 +369,115 @@ scrollPane.getStyleClass().add(
     cards.setHgap(18);
     cards.setVgap(18);
 
-    cards.add(
-        createCard(
-            "👨‍🌾",
-            "Farmer Management",
-            "Add and manage farmer information"
-        ),
-        0, 0
-    );
+    VBox farmerCard = createCard("👨‍🌾",
+    "Farmer Management",
+    "Add and manage farmer information"
+);
 
-    cards.add(
-        createCard(
-            "🌱",
-            "Crop Management",
-            "Manage crops and cultivation details"
-        ),
-        1, 0
-    );
+farmerCard.setOnMouseClicked(event -> {
 
-    cards.add(
-        createCard(
-            "🧪",
-            "Fertilizer Management",
-            "Manage fertilizer records"
-        ),
-        0, 1
-    );
+    FarmerManagement farmerManagement =
+        new FarmerManagement();
 
-    cards.add(
-        createCard(
-            "🚜",
-            "Equipment Management",
-            "Manage agricultural equipment"
-        ),
-        1, 1
-    );
+    farmerManagement.show(stage);});
 
-    cards.add(
-        createCard(
-            "🛒",
-            "Market Management",
-            "Manage crop market information"
-        ),
-        2, 0
-    );
+cards.add(
+    farmerCard,
+    0, 0);
+    VBox cropCard = createCard(
+    "🌱",
+    "Crop Management",
+    "Manage crops and cultivation details"
+);
 
-    cards.add(
-        createCard(
-            "📊",
-            "Reports",
-            "View agricultural reports"
-        ),
-        2, 1
-    );
+cropCard.setOnMouseClicked(event -> {
 
+    CropManagement cropManagement =
+        new CropManagement();
+
+    cropManagement.show(stage);
+});
+
+cards.add(
+    cropCard,
+    1, 0
+);
+
+   VBox fertilizerCard = createCard(
+    "🧪",
+    "Fertilizer Management",
+    "Manage fertilizer records"
+);
+
+fertilizerCard.setOnMouseClicked(event -> {
+
+    FertilizerManagement fertilizerManagement =
+        new FertilizerManagement();
+
+    fertilizerManagement.show(stage);
+});
+
+cards.add(
+    fertilizerCard,
+    0, 1
+);
+
+   VBox equipmentCard = createCard(
+    "🚜",
+    "Equipment Management",
+    "Manage agricultural equipment"
+);
+
+equipmentCard.setOnMouseClicked(event -> {
+
+    EquipmentManagement equipmentManagement =
+        new EquipmentManagement();
+
+    equipmentManagement.show(stage);
+});
+
+cards.add(
+    equipmentCard,
+    1, 1
+);
+
+   VBox marketCard = createCard(
+    "🛒",
+    "Market Management",
+    "Manage crop market information"
+);
+
+marketCard.setOnMouseClicked(event -> {
+
+    MarketManagement marketManagement =
+        new MarketManagement();
+
+    marketManagement.show(stage);
+});
+
+cards.add(
+    marketCard,
+    2, 0
+);
+
+    VBox reportsCard = createCard(
+    "📊",
+    "Reports",
+    "View agricultural reports"
+);
+
+reportsCard.setOnMouseClicked(event -> {
+
+    Reports reportsScreen =
+        new Reports();
+
+    reportsScreen.show(stage);
+});
+
+cards.add(
+    reportsCard,
+    2, 1
+);
     center.getChildren().addAll(
         welcomeBox,
         overviewTitle,
