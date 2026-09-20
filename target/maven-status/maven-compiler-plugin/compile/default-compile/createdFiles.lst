@@ -1,10 +1,12 @@
-com\agronova\EquipmentManagement.class
-com\agronova\MarketManagement.class
+com\agronova\FirestoreTest.class
 com\agronova\Reports.class
-com\agronova\CropManagement.class
 com\agronova\FertilizerManagement.class
-com\agronova\Main.class
-com\agronova\CreateAccount.class
 com\agronova\FarmerManagement.class
+com\agronova\FirebaseConfig.class
 com\agronova\ProfileSettings.class
 com\agronova\Dashboard.class
+com\agronova\EquipmentManagement.class
+com\agronova\MarketManagement.class
+com\agronova\CropManagement.class
+com\agronova\Main.class
+com\agronova\CreateAccount.class

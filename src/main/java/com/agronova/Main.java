@@ -26,6 +26,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
 
 public class Main extends Application {
 
@@ -33,7 +35,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-
+        FirebaseConfig.initializeFirebase();
+        FirestoreTest.testFirestore();
         this.stage = stage;
 
         showSplashScreen();
@@ -42,6 +45,7 @@ public class Main extends Application {
         stage.setWidth(1000);
         stage.setHeight(650);
         stage.setResizable(false);
+        stage.setMaximized(true);
         stage.show();
     }
 
@@ -480,13 +484,13 @@ getStarted.getStyleClass().add("get-started-button");
         scene.getStylesheets().add(
     getClass().getResource("/style.css").toExternalForm()
 );
-
+        
         stage.setScene(scene);
+        stage.setMaximized(true);
     }
 
     // ================= LOGIN SCREEN =================
-
-    private void showLoginScreen() {
+   private void showLoginScreen() {
 
         StackPane root = new StackPane();
 
@@ -585,23 +589,58 @@ register.setOnAction(e -> {
             register
         );
 
-        login.setOnAction(event -> {
+     login.setOnAction(event -> {
 
-            if (!username.getText().isEmpty()
-                    && !password.getText().isEmpty()) {
+    if (username.getText().isEmpty()
+            || password.getText().isEmpty()) {
 
-                Dashboard dashboard = new Dashboard();
-dashboard.show(stage);
+        subtitle.setText(
+            "Please enter username and password"
+        );
 
-            } else {
+        subtitle.setTextFill(Color.RED);
+        return;
+    }
 
-                subtitle.setText(
-                    "Please enter username and password"
-                );
+    try {
 
-                subtitle.setTextFill(Color.RED);
-            }
-        });
+        Firestore db = FirestoreClient.getFirestore();
+
+        var documents = db.collection("users")
+                .whereEqualTo("email", username.getText())
+                .whereEqualTo("password", password.getText())
+                .get()
+                .get()
+                .getDocuments();
+
+        if (!documents.isEmpty()) {
+
+            subtitle.setText("Login successful! 🌱");
+            subtitle.setTextFill(Color.web("#176b45"));
+
+            Dashboard dashboard = new Dashboard();
+            dashboard.show(stage);
+
+        } else {
+
+            subtitle.setText(
+                "Invalid email or password"
+            );
+
+            subtitle.setTextFill(Color.RED);
+        }
+
+    } catch (Exception ex) {
+
+        subtitle.setText(
+            "Login failed!"
+        );
+
+        subtitle.setTextFill(Color.RED);
+
+        ex.printStackTrace();
+    }
+});
 
         card.getChildren().addAll(
             logo,

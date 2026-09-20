@@ -13,7 +13,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
 public class CreateAccount extends Application {
 
     @Override
@@ -105,9 +106,33 @@ public class CreateAccount extends Application {
 
     } else {
 
+         try {
+
+        Firestore db = FirestoreClient.getFirestore();
+
+        java.util.Map<String, Object> userData =
+                new java.util.HashMap<>();
+
+        userData.put("fullName", nameField.getText());
+        userData.put("email", emailField.getText());
+        userData.put("mobile", mobileField.getText());
+        userData.put("password", passwordField.getText());
+
+        db.collection("users")
+          .add(userData);
+
         subtitle.setText("Account created successfully! 🌱");
         subtitle.setTextFill(Color.web("#176b45"));
+
+    } catch (Exception ex) {
+
+        subtitle.setText("Failed to create account!");
+        subtitle.setTextFill(Color.RED);
+
+        ex.printStackTrace();
     }
+}
+    
 });
         createButton.setPrefWidth(300);
         createButton.setPrefHeight(45);
