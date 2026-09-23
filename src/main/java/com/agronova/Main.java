@@ -536,7 +536,7 @@ getStarted.getStyleClass().add("get-started-button");
 
         TextField username = new TextField();
 
-        username.setPromptText("Username");
+        username.setPromptText("Enter your email");
         username.setPrefHeight(45);
 
         PasswordField password =
