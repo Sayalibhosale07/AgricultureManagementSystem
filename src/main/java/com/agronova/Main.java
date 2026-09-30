@@ -618,8 +618,8 @@ register.setOnAction(e -> {
             subtitle.setText("Login successful! 🌱");
             subtitle.setTextFill(Color.web("#176b45"));
 
-            Dashboard dashboard = new Dashboard();
-            dashboard.show(stage);
+           Dashboard dashboard = new Dashboard();
+dashboard.show(stage, username.getText());
 
         } else {
 

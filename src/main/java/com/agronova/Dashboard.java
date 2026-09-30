@@ -21,10 +21,14 @@ import javafx.application.Platform;
 public class Dashboard {
 
 private Stage stage;
+private String loggedInEmail;
 private Firestore db;
 
 // ================= DASHBOARD =================
-
+public void show(Stage stage, String email) {
+    this.loggedInEmail = email;
+    show(stage);
+}
 public void show(Stage stage) {
 
     this.stage = stage;
@@ -235,8 +239,7 @@ public void show(Stage stage) {
 
         ProfileSettings profileSettings =
             new ProfileSettings();
-
-        profileSettings.show(stage);
+profileSettings.show(stage, loggedInEmail);
     });
 
 
