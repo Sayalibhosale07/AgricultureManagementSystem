@@ -1,5 +1,8 @@
 package com.agronova;
-
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.animation.FadeTransition;
 import javafx.animation.PauseTransition;
 import javafx.animation.ScaleTransition;
@@ -26,8 +29,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import com.google.cloud.firestore.Firestore;
-import com.google.firebase.cloud.FirestoreClient;
 
 public class Main extends Application {
 
@@ -289,14 +290,29 @@ move.play();
 }
     // ================= WELCOME SCREEN =================
 
-    private void showWelcomeScreen() {
+   private void showWelcomeScreen() {
 
-        StackPane root = new StackPane();
+    StackPane root = new StackPane();
 
-        // Background
-        root.setStyle(
-            "-fx-background-color: linear-gradient(to bottom right, #dff3df, #8fc98c, #397a3d);"
-        );
+    // ================= AGRICULTURE BACKGROUND IMAGE =================
+
+    Image backgroundImage = new Image(
+        getClass().getResourceAsStream("/images/farmer.png")
+    );
+
+    ImageView backgroundView = new ImageView(backgroundImage);
+
+    backgroundView.setPreserveRatio(false);
+    backgroundView.fitWidthProperty().bind(root.widthProperty());
+    backgroundView.fitHeightProperty().bind(root.heightProperty());
+
+    // Make image subtle so the Welcome Card remains clear
+    backgroundView.setOpacity(0.65);
+
+    // Background fallback color
+    root.setStyle(
+        "-fx-background-color: linear-gradient(to bottom right, #dff3df, #8fc98c, #397a3d);"
+    );
 
         // Main Card
         VBox content = new VBox(18);
@@ -469,12 +485,11 @@ welcome.getStyleClass().add("agro-tagline");
 description.getStyleClass().add("agro-description");
 
 getStarted.getStyleClass().add("get-started-button");
-        root.getChildren().add(content);
-       StackPane.setAlignment(
-    content,
-    Pos.CENTER
+       root.getChildren().addAll(
+    backgroundView,
+    content
 );
-
+      
         StackPane.setAlignment(
             content,
             Pos.CENTER
@@ -492,173 +507,261 @@ getStarted.getStyleClass().add("get-started-button");
     // ================= LOGIN SCREEN =================
    private void showLoginScreen() {
 
-        StackPane root = new StackPane();
+    StackPane root = new StackPane();
 
-        root.setStyle(
-            "-fx-background-color: linear-gradient(to bottom right, #0b3d2e, #1b6b4a, #8fbc8f);"
-        );
+    // ================= AGRICULTURE BACKGROUND IMAGE =================
 
-        VBox card = new VBox(18);
+    Image backgroundImage = new Image(
+        getClass().getResourceAsStream("/images/farmer.png")
+    );
 
-        card.setAlignment(Pos.CENTER);
-        card.setPrefWidth(400);
-        card.setMaxWidth(400);
-        card.setPadding(new Insets(40));
+    ImageView backgroundView = new ImageView(backgroundImage);
 
-        card.setStyle(
-            "-fx-background-color: rgba(255,255,255,0.96);" +
-            "-fx-background-radius: 25;" +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 25, 0, 0, 8);"
-        );
+    backgroundView.setPreserveRatio(false);
+    backgroundView.fitWidthProperty().bind(root.widthProperty());
+    backgroundView.fitHeightProperty().bind(root.heightProperty());
 
-        Label logo = new Label("🌾");
-        logo.setFont(Font.font(50));
+    // Keep background subtle so login card is clearly visible
+    backgroundView.setOpacity(0.65);
 
-        Label title = new Label("Welcome Back!");
+    // Fallback background color
+    root.setStyle(
+        "-fx-background-color: linear-gradient(to bottom right, #0b3d2e, #1b6b4a, #8fbc8f);"
+    );
 
-        title.setFont(
-            Font.font("Arial", FontWeight.BOLD, 30)
-        );
 
-        title.setTextFill(
-            Color.web("#174d35")
-        );
+    // ================= LOGIN CARD =================
 
-        Label subtitle = new Label(
-            "Login to your AgroNova account"
-        );
+    VBox card = new VBox(18);
 
-        subtitle.setFont(
-            Font.font("Arial", 14)
-        );
+    card.setAlignment(Pos.CENTER);
+    card.setPrefWidth(400);
+    card.setMaxWidth(400);
+    card.setPadding(new Insets(40));
 
-        subtitle.setTextFill(Color.GRAY);
+    card.setStyle(
+        "-fx-background-color: rgba(255,255,255,0.96);" +
+        "-fx-background-radius: 25;" +
+        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.30), 25, 0, 0, 8);"
+    );
 
-        TextField username = new TextField();
 
-        username.setPromptText("Enter your email");
-        username.setPrefHeight(45);
+    // ================= LOGO =================
 
-        PasswordField password =
-            new PasswordField();
+    Label logo = new Label("🌾");
+    logo.setFont(Font.font(50));
 
-        password.setPromptText("Password");
-        password.setPrefHeight(45);
 
-        Button login = new Button("LOGIN  →");
+    // ================= TITLE =================
 
-        login.setPrefWidth(300);
-        login.setPrefHeight(48);
+    Label title = new Label("Welcome Back!");
 
-        login.setStyle(
-            "-fx-background-color: #176b45;" +
-            "-fx-text-fill: white;" +
-            "-fx-font-size: 16px;" +
-            "-fx-font-weight: bold;" +
-            "-fx-background-radius: 12;" +
-            "-fx-cursor: hand;"
-        );
+    title.setFont(
+        Font.font("Arial", FontWeight.BOLD, 30)
+    );
 
-        Label newUser = new Label(
-            "Don't have an account?"
-        );
+    title.setTextFill(
+        Color.web("#174d35")
+    );
 
-        newUser.setTextFill(Color.GRAY);
 
-        Button register = new Button(
-    "Create Account"
-);
+    // ================= SUBTITLE =================
 
-register.setOnAction(e -> {
-    CreateAccount createAccount = new CreateAccount();
-    createAccount.start(new Stage());
-});
-        register.setStyle(
-            "-fx-background-color: transparent;" +
-            "-fx-text-fill: #176b45;" +
-            "-fx-font-weight: bold;" +
-            "-fx-cursor: hand;"
-        );
+    Label subtitle = new Label(
+        "Login to your AgroNova account"
+    );
 
-        HBox registerBox = new HBox(5);
+    subtitle.setFont(
+        Font.font("Arial", 14)
+    );
 
-        registerBox.setAlignment(Pos.CENTER);
+    subtitle.setTextFill(Color.GRAY);
 
-        registerBox.getChildren().addAll(
-            newUser,
-            register
-        );
 
-     login.setOnAction(event -> {
+    // ================= USERNAME =================
 
-    if (username.getText().isEmpty()
-            || password.getText().isEmpty()) {
+    TextField username = new TextField();
 
-        subtitle.setText(
-            "Please enter username and password"
-        );
+    username.setPromptText("Enter your email");
+    username.setPrefHeight(45);
 
-        subtitle.setTextFill(Color.RED);
-        return;
-    }
 
-    try {
+    // ================= PASSWORD =================
 
-        Firestore db = FirestoreClient.getFirestore();
+    PasswordField password = new PasswordField();
 
-        var documents = db.collection("users")
-                .whereEqualTo("email", username.getText())
-                .whereEqualTo("password", password.getText())
-                .get()
-                .get()
-                .getDocuments();
+    password.setPromptText("Password");
+    password.setPrefHeight(45);
 
-        if (!documents.isEmpty()) {
 
-            subtitle.setText("Login successful! 🌱");
-            subtitle.setTextFill(Color.web("#176b45"));
+    // ================= LOGIN BUTTON =================
 
-           Dashboard dashboard = new Dashboard();
-dashboard.show(stage, username.getText());
+    Button login = new Button("LOGIN  →");
 
-        } else {
+    login.setPrefWidth(300);
+    login.setPrefHeight(48);
+
+    login.setStyle(
+        "-fx-background-color: #176b45;" +
+        "-fx-text-fill: white;" +
+        "-fx-font-size: 16px;" +
+        "-fx-font-weight: bold;" +
+        "-fx-background-radius: 12;" +
+        "-fx-cursor: hand;"
+    );
+
+
+    // ================= NEW USER =================
+
+    Label newUser = new Label(
+        "Don't have an account?"
+    );
+
+    newUser.setTextFill(Color.GRAY);
+
+
+    // ================= REGISTER BUTTON =================
+
+    Button register = new Button(
+        "Create Account"
+    );
+
+    register.setOnAction(e -> {
+
+        CreateAccount createAccount = new CreateAccount();
+
+        createAccount.start(new Stage());
+
+    });
+
+    register.setStyle(
+        "-fx-background-color: transparent;" +
+        "-fx-text-fill: #176b45;" +
+        "-fx-font-weight: bold;" +
+        "-fx-cursor: hand;"
+    );
+
+
+    // ================= REGISTER BOX =================
+
+    HBox registerBox = new HBox(5);
+
+    registerBox.setAlignment(Pos.CENTER);
+
+    registerBox.getChildren().addAll(
+        newUser,
+        register
+    );
+
+
+    // ================= LOGIN FUNCTIONALITY =================
+
+    login.setOnAction(event -> {
+
+        if (username.getText().isEmpty()
+                || password.getText().isEmpty()) {
 
             subtitle.setText(
-                "Invalid email or password"
+                "Please enter username and password"
             );
 
             subtitle.setTextFill(Color.RED);
+
+            return;
         }
 
-    } catch (Exception ex) {
 
-        subtitle.setText(
-            "Login failed!"
-        );
+        try {
 
-        subtitle.setTextFill(Color.RED);
+            Firestore db = FirestoreClient.getFirestore();
 
-        ex.printStackTrace();
-    }
-});
+            var documents = db.collection("users")
+                    .whereEqualTo(
+                        "email",
+                        username.getText()
+                    )
+                    .whereEqualTo(
+                        "password",
+                        password.getText()
+                    )
+                    .get()
+                    .get()
+                    .getDocuments();
 
-        card.getChildren().addAll(
-            logo,
-            title,
-            subtitle,
-            username,
-            password,
-            login,
-            registerBox
-        );
 
-        root.getChildren().add(card);
+            if (!documents.isEmpty()) {
 
-        Scene scene = new Scene(root);
+                subtitle.setText(
+                    "Login successful! 🌱"
+                );
 
-        stage.setScene(scene);
-    }
+                subtitle.setTextFill(
+                    Color.web("#176b45")
+                );
 
+
+                Dashboard dashboard = new Dashboard();
+
+                dashboard.show(
+                    stage,
+                    username.getText()
+                );
+
+
+            } else {
+
+                subtitle.setText(
+                    "Invalid email or password"
+                );
+
+                subtitle.setTextFill(Color.RED);
+
+            }
+
+
+        } catch (Exception ex) {
+
+            subtitle.setText(
+                "Login failed!"
+            );
+
+            subtitle.setTextFill(Color.RED);
+
+            ex.printStackTrace();
+
+        }
+
+    });
+
+
+    // ================= ADD LOGIN COMPONENTS =================
+
+    card.getChildren().addAll(
+        logo,
+        title,
+        subtitle,
+        username,
+        password,
+        login,
+        registerBox
+    );
+
+
+    // ================= ROOT =================
+
+    root.getChildren().addAll(
+        backgroundView,
+        card
+    );
+
+
+    // ================= SCENE =================
+
+    Scene scene = new Scene(root);
+
+    stage.setScene(scene);
+
+}
     // ================= DASHBOARD =================
 
     private void showDashboard() {
