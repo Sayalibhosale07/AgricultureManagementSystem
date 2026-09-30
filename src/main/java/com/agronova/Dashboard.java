@@ -1,5 +1,6 @@
 package com.agronova;
-
+import com.google.cloud.firestore.Firestore;
+import com.google.firebase.cloud.FirestoreClient;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,15 +17,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.application.Platform;
 public class Dashboard {
 
 private Stage stage;
+private Firestore db;
 
 // ================= DASHBOARD =================
 
 public void show(Stage stage) {
 
     this.stage = stage;
+    db = FirestoreClient.getFirestore();
 
     BorderPane root = new BorderPane();
 
@@ -320,40 +324,55 @@ scrollPane.getStyleClass().add(
         "section-title"
     );
 
-    // ================= STATISTICS =================
+  // ================= STATISTICS =================
 
-    HBox statistics = new HBox(18);
+HBox statistics = new HBox(18);
 
-    statistics.setAlignment(
-        Pos.CENTER_LEFT
-    );
+statistics.setAlignment(
+    Pos.CENTER_LEFT
+);
 
-    statistics.getChildren().addAll(
+// Dynamic count labels
 
-        createStatCard(
-            "👨‍🌾",
-            "Farmers",
-            "25"
-        ),
+Label farmerValue = new Label("...");
+Label cropValue = new Label("...");
+Label equipmentValue = new Label("...");
+Label marketValue = new Label("...");
 
-        createStatCard(
-            "🌱",
-            "Crops",
-            "18"
-        ),
+statistics.getChildren().addAll(
 
-        createStatCard(
-            "🚜",
-            "Equipment",
-            "12"
-        ),
+    createStatCard(
+        "👨‍🌾",
+        "Farmers",
+        farmerValue
+    ),
 
-        createStatCard(
-            "🛒",
-            "Market Items",
-            "20"
-        )
-    );
+    createStatCard(
+        "🌱",
+        "Crops",
+        cropValue
+    ),
+
+    createStatCard(
+        "🚜",
+        "Equipment",
+        equipmentValue
+    ),
+
+    createStatCard(
+        "🛒",
+        "Market Items",
+        marketValue
+    )
+);
+
+// Load actual Firestore counts
+loadDashboardCounts(
+    farmerValue,
+    cropValue,
+    equipmentValue,
+    marketValue
+);
 
     // ================= QUICK MANAGEMENT =================
 
@@ -514,7 +533,7 @@ stage.setScene(scene);
 private VBox createStatCard(
     String icon,
     String title,
-    String value
+    Label valueLabel
 ) {
 
     VBox card = new VBox(5);
@@ -558,8 +577,6 @@ private VBox createStatCard(
         Color.web("#607d64")
     );
 
-    Label valueLabel =
-        new Label(value);
 
     valueLabel.setFont(
         Font.font(
@@ -582,6 +599,75 @@ private VBox createStatCard(
     return card;
 }
 
+// ================= DASHBOARD COUNTS =================
+
+private void loadDashboardCounts(
+    Label farmerValue,
+    Label cropValue,
+    Label equipmentValue,
+    Label marketValue
+) {
+
+    loadCollectionCount(
+        "farmers",
+        farmerValue
+    );
+
+    loadCollectionCount(
+        "crops",
+        cropValue
+    );
+
+    loadCollectionCount(
+        "equipments",
+        equipmentValue
+    );
+
+    loadCollectionCount(
+        "marketItems",
+        marketValue
+    );
+}
+
+
+// ================= COLLECTION COUNT =================
+
+
+private void loadCollectionCount(
+    String collectionName,
+    Label valueLabel
+) {
+
+    new Thread(() -> {
+
+        try {
+
+            int count = db.collection(collectionName)
+                    .get()
+                    .get()
+                    .size();
+
+            Platform.runLater(() -> {
+
+                valueLabel.setText(
+                    String.valueOf(count)
+                );
+
+            });
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            Platform.runLater(() -> {
+
+                valueLabel.setText("0");
+
+            });
+        }
+
+    }).start();
+}
 // ================= MANAGEMENT CARD =================
 
 private VBox createCard(

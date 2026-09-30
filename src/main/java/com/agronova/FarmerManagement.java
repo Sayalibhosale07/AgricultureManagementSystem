@@ -1,4 +1,9 @@
+
 package com.agronova;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
@@ -23,10 +28,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 public class FarmerManagement {
 
     public void show(Stage stage) {
@@ -39,64 +40,52 @@ public class FarmerManagement {
                 "-fx-background-color: #f4f8f4;"
         );
 
-        // ================= TABLE =================
-
-        TableView<Map<String, Object>> farmerTable =
-                new TableView<>();
-
         // ================= TOP BAR =================
 
         HBox topBar = new HBox();
 
         topBar.setAlignment(Pos.CENTER_LEFT);
         topBar.setPadding(
-                new Insets(18, 25, 18, 25)
+                new Insets(15, 25, 15, 25)
         );
         topBar.setSpacing(20);
 
         topBar.setStyle(
-                "-fx-background-color: #14532d;"
+                "-fx-background-color: linear-gradient(to right, #1b5e20, #43a047);"
         );
 
-        Label logo =
-                new Label("🌿 AgroNova");
+        Label logo = new Label("🌿 AgroNova");
 
         logo.setFont(
                 Font.font(
                         "Arial",
                         FontWeight.BOLD,
-                        25
+                        24
                 )
         );
 
         logo.setTextFill(Color.WHITE);
 
-        Label title =
-                new Label("Farmer Management");
+        Label topTitle = new Label("Farmer Management");
 
-        title.setFont(
+        topTitle.setFont(
                 Font.font(
                         "Arial",
-                        18
+                        FontWeight.NORMAL,
+                        16
                 )
         );
 
-        title.setTextFill(
+        topTitle.setTextFill(
                 Color.web("#d8f3dc")
         );
 
         topBar.getChildren().addAll(
                 logo,
-                title
+                topTitle
         );
 
-        // ================= MAIN CONTENT =================
-
-        VBox content = new VBox(20);
-
-        content.setPadding(
-                new Insets(30)
-        );
+        // ================= TITLE =================
 
         Label heading =
                 new Label("Farmer Management 👨‍🌾");
@@ -105,7 +94,7 @@ public class FarmerManagement {
                 Font.font(
                         "Arial",
                         FontWeight.BOLD,
-                        30
+                        28
                 )
         );
 
@@ -121,7 +110,7 @@ public class FarmerManagement {
         description.setFont(
                 Font.font(
                         "Arial",
-                        16
+                        14
                 )
         );
 
@@ -129,14 +118,40 @@ public class FarmerManagement {
                 Color.web("#607d64")
         );
 
+        // ================= TABLE =================
+
+        TableView<Map<String, Object>> farmerTable =
+                new TableView<>();
+
+        farmerTable.setPrefHeight(220);
+        farmerTable.setMinHeight(220);
+        farmerTable.setMaxHeight(220);
+
+        farmerTable.setStyle(
+                "-fx-background-color: white;" +
+                "-fx-border-color: #c8e6c9;" +
+                "-fx-border-radius: 10;" +
+                "-fx-background-radius: 10;"
+        );
+
         // ================= FORM =================
 
         GridPane form = new GridPane();
 
-        form.setHgap(15);
-        form.setVgap(15);
+        form.setHgap(10);
+        form.setVgap(10);
+        form.setPadding(new Insets(15));
+        form.setAlignment(Pos.CENTER);
 
-        // ---------- Farmer Name ----------
+        form.setStyle(
+                "-fx-background-color: white;" +
+                "-fx-background-radius: 15px;" +
+                "-fx-border-color: #c8e6c9;" +
+                "-fx-border-radius: 15px;" +
+                "-fx-border-width: 1px;"
+        );
+
+        // ================= FARMER NAME =================
 
         Label nameLabel =
                 new Label("Farmer Name");
@@ -148,9 +163,9 @@ public class FarmerManagement {
                 "Enter farmer name"
         );
 
-        nameField.setPrefWidth(250);
+        nameField.setPrefWidth(180);
 
-        // ---------- Phone ----------
+        // ================= PHONE =================
 
         Label phoneLabel =
                 new Label("Phone Number");
@@ -162,7 +177,9 @@ public class FarmerManagement {
                 "Enter phone number"
         );
 
-        // ---------- Email ----------
+        phoneField.setPrefWidth(180);
+
+        // ================= EMAIL =================
 
         Label emailLabel =
                 new Label("Email");
@@ -174,7 +191,9 @@ public class FarmerManagement {
                 "Enter email address"
         );
 
-        // ---------- Village ----------
+        emailField.setPrefWidth(180);
+
+        // ================= VILLAGE =================
 
         Label villageLabel =
                 new Label("Village");
@@ -186,7 +205,9 @@ public class FarmerManagement {
                 "Enter village"
         );
 
-        // ---------- Farm Location ----------
+        villageField.setPrefWidth(180);
+
+        // ================= FARM LOCATION =================
 
         Label locationLabel =
                 new Label("Farm Location");
@@ -198,7 +219,9 @@ public class FarmerManagement {
                 "Enter farm location"
         );
 
-        // ---------- Farm Area ----------
+        locationField.setPrefWidth(180);
+
+        // ================= FARM AREA =================
 
         Label areaLabel =
                 new Label("Farm Area");
@@ -210,7 +233,9 @@ public class FarmerManagement {
                 "Example: 5 acres"
         );
 
-        // ---------- Land Type ----------
+        areaField.setPrefWidth(180);
+
+        // ================= LAND TYPE =================
 
         Label landTypeLabel =
                 new Label("Land Type");
@@ -222,13 +247,15 @@ public class FarmerManagement {
                 "Example: Agricultural"
         );
 
+        landTypeField.setPrefWidth(180);
+
         // ================= ADD BUTTON =================
 
         Button addButton =
                 new Button("ADD FARMER");
 
-        addButton.setPrefWidth(150);
-        addButton.setPrefHeight(40);
+        addButton.setPrefWidth(130);
+        addButton.setPrefHeight(36);
 
         addButton.setStyle(
                 "-fx-background-color: #2e7d32;" +
@@ -243,8 +270,8 @@ public class FarmerManagement {
         Button updateButton =
                 new Button("UPDATE FARMER");
 
-        updateButton.setPrefWidth(150);
-        updateButton.setPrefHeight(40);
+        updateButton.setPrefWidth(130);
+        updateButton.setPrefHeight(36);
 
         updateButton.setStyle(
                 "-fx-background-color: #1565c0;" +
@@ -259,8 +286,8 @@ public class FarmerManagement {
         Button deleteButton =
                 new Button("DELETE FARMER");
 
-        deleteButton.setPrefWidth(150);
-        deleteButton.setPrefHeight(40);
+        deleteButton.setPrefWidth(130);
+        deleteButton.setPrefHeight(36);
 
         deleteButton.setStyle(
                 "-fx-background-color: #c62828;" +
@@ -781,11 +808,13 @@ public class FarmerManagement {
                 3
         );
 
+        // ================= BUTTON BOX =================
+
         HBox buttonBox =
-                new HBox(15);
+                new HBox(10);
 
         buttonBox.setAlignment(
-                Pos.CENTER_LEFT
+                Pos.CENTER
         );
 
         buttonBox.getChildren().addAll(
@@ -914,17 +943,15 @@ public class FarmerManagement {
                 landTypeColumn
         );
 
-        // ================= TABLE WIDTH =================
+        // ================= COMPACT TABLE WIDTH =================
 
-        nameColumn.setPrefWidth(170);
-        phoneColumn.setPrefWidth(140);
-        emailColumn.setPrefWidth(200);
-        villageColumn.setPrefWidth(150);
-        locationColumn.setPrefWidth(180);
-        areaColumn.setPrefWidth(130);
-        landTypeColumn.setPrefWidth(150);
-
-        farmerTable.setPrefHeight(350);
+        nameColumn.setPrefWidth(150);
+        phoneColumn.setPrefWidth(125);
+        emailColumn.setPrefWidth(180);
+        villageColumn.setPrefWidth(130);
+        locationColumn.setPrefWidth(160);
+        areaColumn.setPrefWidth(110);
+        landTypeColumn.setPrefWidth(140);
 
         // ================= SELECT FARMER =================
 
@@ -995,7 +1022,7 @@ public class FarmerManagement {
         Button backButton =
                 new Button("← Back to Dashboard");
 
-        backButton.setPrefHeight(40);
+        backButton.setPrefHeight(36);
 
         backButton.setStyle(
                 "-fx-background-color: #dceddc;" +
@@ -1017,15 +1044,31 @@ public class FarmerManagement {
 
         loadFarmers(farmerTable);
 
-        // ================= ADD CONTENT =================
+        // ================= CONTENT =================
 
-        content.getChildren().addAll(
+        VBox content =
+        new VBox(
+                8,
                 heading,
                 description,
                 form,
                 farmerTable,
                 backButton
         );
+
+        content.setAlignment(
+                Pos.TOP_CENTER
+        );
+
+        content.setPadding(
+                new Insets(20)
+        );
+
+        content.setFillWidth(false);
+
+        content.setMaxHeight(650);
+
+        // ================= ROOT =================
 
         root.setTop(topBar);
         root.setCenter(content);
@@ -1132,3 +1175,4 @@ public class FarmerManagement {
         alert.showAndWait();
     }
 }
+

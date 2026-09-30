@@ -3,6 +3,7 @@ package com.agronova;
 import com.google.cloud.firestore.Firestore;
 import com.google.firebase.cloud.FirestoreClient;
 
+import javafx.beans.property.SimpleStringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,10 +15,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.util.HashMap;
@@ -28,39 +31,70 @@ public class CropManagement {
 
     public void show(Stage stage) {
 
-        // =========================
-        // TOP BAR
-        // =========================
+        // ================= ROOT =================
 
-        Label logo = new Label("🌿 AgroNova");
-        logo.setFont(Font.font("Arial", 26));
-        logo.setTextFill(Color.WHITE);
+        BorderPane root = new BorderPane();
 
-        Label subtitle = new Label("Crop Management");
-        subtitle.setFont(Font.font("Arial", 16));
-        subtitle.setTextFill(Color.WHITE);
+        root.setStyle(
+                "-fx-background-color: #f4f8f4;"
+        );
 
-        HBox topBar = new HBox(20, logo, subtitle);
+        // ================= TOP BAR =================
+
+        HBox topBar = new HBox();
 
         topBar.setAlignment(Pos.CENTER_LEFT);
-
         topBar.setPadding(
-                new Insets(18, 25, 18, 25)
+                new Insets(15, 25, 15, 25)
         );
+        topBar.setSpacing(20);
 
         topBar.setStyle(
                 "-fx-background-color: linear-gradient(to right, #1b5e20, #43a047);"
         );
 
-        // =========================
-        // PAGE TITLE
-        // =========================
+        Label logo = new Label("🌿 AgroNova");
+
+        logo.setFont(
+                Font.font(
+                        "Arial",
+                        FontWeight.BOLD,
+                        24
+                )
+        );
+
+        logo.setTextFill(Color.WHITE);
+
+        Label topTitle =
+                new Label("Crop Management");
+
+        topTitle.setFont(
+                Font.font(
+                        "Arial",
+                        16
+                )
+        );
+
+        topTitle.setTextFill(
+                Color.web("#d8f3dc")
+        );
+
+        topBar.getChildren().addAll(
+                logo,
+                topTitle
+        );
+
+        // ================= PAGE TITLE =================
 
         Label title =
                 new Label("Crop Management 🌱");
 
         title.setFont(
-                Font.font("Arial", 30)
+                Font.font(
+                        "Arial",
+                        FontWeight.BOLD,
+                        28
+                )
         );
 
         title.setTextFill(
@@ -73,23 +107,20 @@ public class CropManagement {
                 );
 
         description.setFont(
-                Font.font("Arial", 15)
+                Font.font(
+                        "Arial",
+                        14
+                )
         );
 
         description.setTextFill(
-                Color.DARKGRAY
+                Color.web("#607d64")
         );
 
-        // =========================
-        // INPUT FIELDS
-        // =========================
+        // ================= INPUT FIELDS =================
 
         Label cropNameLabel =
                 new Label("Crop Name");
-
-        cropNameLabel.setFont(
-                Font.font("Arial", 15)
-        );
 
         TextField cropName =
                 new TextField();
@@ -98,14 +129,10 @@ public class CropManagement {
                 "Enter crop name"
         );
 
-        cropName.setPrefWidth(350);
+        cropName.setPrefWidth(200);
 
         Label seasonLabel =
                 new Label("Season");
-
-        seasonLabel.setFont(
-                Font.font("Arial", 15)
-        );
 
         TextField season =
                 new TextField();
@@ -114,14 +141,10 @@ public class CropManagement {
                 "Enter season"
         );
 
-        season.setPrefWidth(350);
+        season.setPrefWidth(200);
 
         Label areaLabel =
                 new Label("Land Area");
-
-        areaLabel.setFont(
-                Font.font("Arial", 15)
-        );
 
         TextField area =
                 new TextField();
@@ -130,77 +153,160 @@ public class CropManagement {
                 "Enter land area"
         );
 
-        area.setPrefWidth(350);
+        area.setPrefWidth(200);
 
-        // =========================
-        // ADD CROP BUTTON
-        // =========================
+        // ================= ADD BUTTON =================
 
         Button addCrop =
-                new Button("ADD CROP 🌱");
+                new Button("ADD CROP");
+
+        addCrop.setPrefWidth(125);
+        addCrop.setPrefHeight(36);
 
         addCrop.setStyle(
                 "-fx-background-color: #2e7d32;" +
                 "-fx-text-fill: white;" +
-                "-fx-font-size: 15px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-padding: 12px 25px;" +
-                "-fx-background-radius: 8px;"
+                "-fx-background-radius: 8;" +
+                "-fx-cursor: hand;"
         );
 
-        // =========================
-        // UPDATE BUTTON
-        // =========================
+        // ================= UPDATE BUTTON =================
 
         Button updateCrop =
-                new Button("UPDATE CROP");
+                new Button("UPDATE");
+
+        updateCrop.setPrefWidth(125);
+        updateCrop.setPrefHeight(36);
 
         updateCrop.setStyle(
                 "-fx-background-color: #1976d2;" +
                 "-fx-text-fill: white;" +
-                "-fx-font-size: 14px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-padding: 10px 20px;" +
-                "-fx-background-radius: 8px;"
+                "-fx-background-radius: 8;" +
+                "-fx-cursor: hand;"
         );
 
-        // =========================
-        // DELETE BUTTON
-        // =========================
+        // ================= DELETE BUTTON =================
 
         Button deleteCrop =
-                new Button("DELETE CROP");
+                new Button("DELETE");
+
+        deleteCrop.setPrefWidth(125);
+        deleteCrop.setPrefHeight(36);
 
         deleteCrop.setStyle(
                 "-fx-background-color: #d32f2f;" +
                 "-fx-text-fill: white;" +
-                "-fx-font-size: 14px;" +
                 "-fx-font-weight: bold;" +
-                "-fx-padding: 10px 20px;" +
-                "-fx-background-radius: 8px;"
+                "-fx-background-radius: 8;" +
+                "-fx-cursor: hand;"
         );
 
-        // =========================
-        // UPDATE + DELETE BUTTONS
-        // =========================
+        // ================= FORM =================
+
+        GridPane form =
+                new GridPane();
+
+        form.setHgap(10);
+        form.setVgap(8);
+
+        form.setPadding(
+                new Insets(12)
+        );
+
+        form.setAlignment(
+                Pos.CENTER
+        );
+
+        form.setStyle(
+                "-fx-background-color: white;" +
+                "-fx-background-radius: 12px;" +
+                "-fx-border-color: #c8e6c9;" +
+                "-fx-border-radius: 12px;" +
+                "-fx-border-width: 1px;"
+        );
+
+        // Row 1
+
+        form.add(
+                cropNameLabel,
+                0,
+                0
+        );
+
+        form.add(
+                cropName,
+                1,
+                0
+        );
+
+        form.add(
+                seasonLabel,
+                2,
+                0
+        );
+
+        form.add(
+                season,
+                3,
+                0
+        );
+
+        // Row 2
+
+        form.add(
+                areaLabel,
+                0,
+                1
+        );
+
+        form.add(
+                area,
+                1,
+                1
+        );
+
+        // Buttons
 
         HBox actionButtons =
-                new HBox(
-                        15,
-                        updateCrop,
-                        deleteCrop
-                );
+                new HBox(8);
 
         actionButtons.setAlignment(
-                Pos.CENTER_LEFT
+                Pos.CENTER
         );
 
-        // =========================
-        // CROP TABLE
-        // =========================
+        actionButtons.getChildren().addAll(
+                addCrop,
+                updateCrop,
+                deleteCrop
+        );
+
+        form.add(
+                actionButtons,
+                2,
+                1,
+                2,
+                1
+        );
+
+        // ================= CROP TABLE =================
 
         TableView<Map<String, Object>> cropTable =
                 new TableView<>();
+
+        cropTable.setPrefHeight(220);
+        cropTable.setMinHeight(220);
+        cropTable.setMaxHeight(220);
+
+        cropTable.setStyle(
+                "-fx-background-color: white;" +
+                "-fx-border-color: #c8e6c9;" +
+                "-fx-border-radius: 10;" +
+                "-fx-background-radius: 10;"
+        );
+
+        // ================= TABLE COLUMNS =================
 
         TableColumn<Map<String, Object>, String>
                 cropNameColumn =
@@ -214,54 +320,43 @@ public class CropManagement {
                 areaColumn =
                 new TableColumn<>("Land Area");
 
-        // =========================
-        // CROP NAME COLUMN
-        // =========================
+        // ================= CELL VALUES =================
 
-        cropNameColumn.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(
-                        String.valueOf(
-                                data.getValue()
-                                        .get("cropName")
+        cropNameColumn.setCellValueFactory(
+                data ->
+                        new SimpleStringProperty(
+                                String.valueOf(
+                                        data.getValue()
+                                                .get("cropName")
+                                )
                         )
-                )
         );
 
-        // =========================
-        // SEASON COLUMN
-        // =========================
-
-        seasonColumn.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(
-                        String.valueOf(
-                                data.getValue()
-                                        .get("season")
+        seasonColumn.setCellValueFactory(
+                data ->
+                        new SimpleStringProperty(
+                                String.valueOf(
+                                        data.getValue()
+                                                .get("season")
+                                )
                         )
-                )
         );
 
-        // =========================
-        // AREA COLUMN
-        // =========================
-
-        areaColumn.setCellValueFactory(data ->
-                new javafx.beans.property.SimpleStringProperty(
-                        String.valueOf(
-                                data.getValue()
-                                        .get("area")
+        areaColumn.setCellValueFactory(
+                data ->
+                        new SimpleStringProperty(
+                                String.valueOf(
+                                        data.getValue()
+                                                .get("area")
+                                )
                         )
-                )
         );
 
-        // =========================
-        // TABLE WIDTH
-        // =========================
+        // ================= TABLE WIDTH =================
 
-        cropNameColumn.setPrefWidth(220);
-
-        seasonColumn.setPrefWidth(220);
-
-        areaColumn.setPrefWidth(220);
+        cropNameColumn.setPrefWidth(250);
+        seasonColumn.setPrefWidth(250);
+        areaColumn.setPrefWidth(180);
 
         cropTable.getColumns().addAll(
                 cropNameColumn,
@@ -271,18 +366,12 @@ public class CropManagement {
 
         cropTable.setMaxWidth(700);
 
-        cropTable.setPrefHeight(300);
-
-        // =========================
-        // SELECTED CROP TRACKING
-        // =========================
+        // ================= SELECTED CROP =================
 
         final String[] selectedCropName =
-                { null };
+                {null};
 
-        // =========================
-        // SELECT CROP FROM TABLE
-        // =========================
+        // ================= SELECT CROP =================
 
         cropTable.setOnMouseClicked(event -> {
 
@@ -329,9 +418,7 @@ public class CropManagement {
             }
         });
 
-        // =========================
-        // ADD CROP
-        // =========================
+        // ================= ADD CROP =================
 
         addCrop.setOnAction(event -> {
 
@@ -339,7 +426,9 @@ public class CropManagement {
                     || season.getText().isEmpty()
                     || area.getText().isEmpty()) {
 
-                System.out.println(
+                showAlert(
+                        Alert.AlertType.WARNING,
+                        "Missing Information",
                         "Please fill all crop details."
                 );
 
@@ -379,12 +468,16 @@ public class CropManagement {
                 loadCrops(cropTable);
 
                 cropName.clear();
-
                 season.clear();
-
                 area.clear();
 
                 selectedCropName[0] = null;
+
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "Success",
+                        "Crop added successfully!"
+                );
 
             } catch (Exception ex) {
 
@@ -393,19 +486,25 @@ public class CropManagement {
                 );
 
                 ex.printStackTrace();
+
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Error",
+                        "Failed to add crop."
+                );
             }
         });
 
-        // =========================
-        // UPDATE CROP
-        // =========================
+        // ================= UPDATE CROP =================
 
         updateCrop.setOnAction(event -> {
 
             if (selectedCropName[0] == null) {
 
-                System.out.println(
-                        "Please select a crop first."
+                showAlert(
+                        Alert.AlertType.WARNING,
+                        "Select Crop",
+                        "Please select a crop from the table first."
                 );
 
                 return;
@@ -415,7 +514,9 @@ public class CropManagement {
                     || season.getText().isEmpty()
                     || area.getText().isEmpty()) {
 
-                System.out.println(
+                showAlert(
+                        Alert.AlertType.WARNING,
+                        "Missing Information",
                         "Please fill all crop details."
                 );
 
@@ -439,8 +540,10 @@ public class CropManagement {
 
                 if (documents.isEmpty()) {
 
-                    System.out.println(
-                            "Crop not found!"
+                    showAlert(
+                            Alert.AlertType.WARNING,
+                            "Not Found",
+                            "Crop not found."
                     );
 
                     return;
@@ -477,12 +580,16 @@ public class CropManagement {
                 loadCrops(cropTable);
 
                 cropName.clear();
-
                 season.clear();
-
                 area.clear();
 
                 selectedCropName[0] = null;
+
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "Updated",
+                        "Crop updated successfully!"
+                );
 
             } catch (Exception ex) {
 
@@ -491,19 +598,25 @@ public class CropManagement {
                 );
 
                 ex.printStackTrace();
+
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Error",
+                        "Failed to update crop."
+                );
             }
         });
 
-        // =========================
-        // DELETE CROP
-        // =========================
+        // ================= DELETE CROP =================
 
         deleteCrop.setOnAction(event -> {
 
             if (selectedCropName[0] == null) {
 
-                System.out.println(
-                        "Please select a crop first."
+                showAlert(
+                        Alert.AlertType.WARNING,
+                        "Select Crop",
+                        "Please select a crop from the table first."
                 );
 
                 return;
@@ -553,8 +666,10 @@ public class CropManagement {
 
                 if (documents.isEmpty()) {
 
-                    System.out.println(
-                            "Crop not found!"
+                    showAlert(
+                            Alert.AlertType.WARNING,
+                            "Not Found",
+                            "Crop not found."
                     );
 
                     return;
@@ -571,12 +686,16 @@ public class CropManagement {
                 loadCrops(cropTable);
 
                 cropName.clear();
-
                 season.clear();
-
                 area.clear();
 
                 selectedCropName[0] = null;
+
+                showAlert(
+                        Alert.AlertType.INFORMATION,
+                        "Deleted",
+                        "Crop deleted successfully!"
+                );
 
             } catch (Exception ex) {
 
@@ -585,30 +704,34 @@ public class CropManagement {
                 );
 
                 ex.printStackTrace();
+
+                showAlert(
+                        Alert.AlertType.ERROR,
+                        "Error",
+                        "Failed to delete crop."
+                );
             }
         });
 
-        // =========================
-        // LOAD EXISTING CROPS
-        // =========================
+        // ================= LOAD CROPS =================
 
         loadCrops(cropTable);
 
-        // =========================
-        // BACK BUTTON
-        // =========================
+        // ================= BACK BUTTON =================
 
         Button backButton =
                 new Button(
                         "← Back to Dashboard"
                 );
 
+        backButton.setPrefHeight(36);
+
         backButton.setStyle(
-                "-fx-background-color: #eeeeee;" +
-                "-fx-text-fill: #333333;" +
-                "-fx-font-size: 14px;" +
-                "-fx-padding: 10px 20px;" +
-                "-fx-background-radius: 8px;"
+                "-fx-background-color: #dceddc;" +
+                "-fx-text-fill: #1b5e20;" +
+                "-fx-font-weight: bold;" +
+                "-fx-background-radius: 8;" +
+                "-fx-cursor: hand;"
         );
 
         backButton.setOnAction(event -> {
@@ -619,46 +742,11 @@ public class CropManagement {
             dashboard.show(stage);
         });
 
-        // =========================
-        // FORM
-        // =========================
-
-        VBox form =
-                new VBox(
-                        10,
-                        cropNameLabel,
-                        cropName,
-                        seasonLabel,
-                        season,
-                        areaLabel,
-                        area,
-                        addCrop,
-                        actionButtons
-                );
-
-        form.setAlignment(
-                Pos.CENTER_LEFT
-        );
-
-        form.setPadding(
-                new Insets(25)
-        );
-
-        form.setStyle(
-                "-fx-background-color: white;" +
-                "-fx-background-radius: 15px;" +
-                "-fx-border-color: #c8e6c9;" +
-                "-fx-border-radius: 15px;" +
-                "-fx-border-width: 1px;"
-        );
-
-        // =========================
-        // MAIN CONTENT
-        // =========================
+        // ================= CONTENT =================
 
         VBox content =
                 new VBox(
-                        20,
+                        8,
                         title,
                         description,
                         form,
@@ -671,27 +759,19 @@ public class CropManagement {
         );
 
         content.setPadding(
-                new Insets(40)
+                new Insets(15)
         );
 
-        // =========================
-        // ROOT
-        // =========================
+        content.setFillWidth(false);
 
-        BorderPane root =
-                new BorderPane();
+        content.setMaxHeight(650);
+
+        // ================= ROOT =================
 
         root.setTop(topBar);
-
         root.setCenter(content);
 
-        root.setStyle(
-                "-fx-background-color: #f4f8f4;"
-        );
-
-        // =========================
-        // SCENE
-        // =========================
+        // ================= SCENE =================
 
         Scene scene =
                 new Scene(
@@ -711,9 +791,9 @@ public class CropManagement {
         stage.show();
     }
 
-    // =========================
+    // =====================================================
     // LOAD CROPS FROM FIRESTORE
-    // =========================
+    // =====================================================
 
     private void loadCrops(
             TableView<Map<String, Object>> cropTable) {
@@ -751,4 +831,24 @@ public class CropManagement {
             ex.printStackTrace();
         }
     }
+
+    // =====================================================
+    // ALERT
+    // =====================================================
+
+    private void showAlert(
+            Alert.AlertType type,
+            String title,
+            String message) {
+
+        Alert alert =
+                new Alert(type);
+
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
+    }
 }
+
