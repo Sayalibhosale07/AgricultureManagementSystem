@@ -1,14 +1,14 @@
-/* ===============================
+/* =========================================================
    AGRO NOVA - MAIN THEME
-   =============================== */
+   ========================================================= */
 
 .root {
   -fx-font-family: "Arial";
 }
 
-/* ===============================
+/* =========================================================
    WELCOME PAGE
-   =============================== */
+   ========================================================= */
 
 .welcome-page {
   -fx-background-color: linear-gradient(
@@ -19,119 +19,83 @@
   );
 }
 
-/* Decorative agriculture glow */
-
 .agro-glow {
   -fx-fill: rgba(255, 255, 255, 0.2);
 }
 
-/* ===============================
+/* =========================================================
    WELCOME CARD
-   =============================== */
+   ========================================================= */
 
 .welcome-card {
-  -fx-background-color: rgba(255, 255, 255, 0.94);
-
+  -fx-background-color: rgba(255, 255, 255, 0.96);
   -fx-background-radius: 30;
-
   -fx-border-radius: 30;
-
-  -fx-border-color: rgba(255, 255, 255, 0.6);
-
+  -fx-border-color: rgba(255, 255, 255, 0.7);
   -fx-border-width: 1;
-
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 25, 0, 0, 8);
-
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 25, 0, 0, 8);
   -fx-padding: 42;
 }
 
-/* ===============================
-   LOGO
-   =============================== */
+/* =========================================================
+   LOGO / WELCOME
+   ========================================================= */
 
 .agro-logo {
   -fx-font-size: 55px;
 }
 
-/* ===============================
-   TITLE
-   =============================== */
-
 .agro-title {
   -fx-font-size: 44px;
-
   -fx-font-weight: bold;
-
   -fx-text-fill: #185c36;
 }
 
-/* ===============================
-   SUB TITLE
-   =============================== */
-
 .agro-subtitle {
   -fx-font-size: 14px;
-
   -fx-font-weight: bold;
-
   -fx-letter-spacing: 2px;
-
   -fx-text-fill: #5c8f58;
 }
 
-/* ===============================
-   TAGLINE
-   =============================== */
-
 .agro-tagline {
   -fx-font-size: 24px;
-
   -fx-font-weight: bold;
-
   -fx-text-fill: #254f32;
 }
 
-/* ===============================
-   DESCRIPTION
-   =============================== */
-
 .agro-description {
   -fx-font-size: 15px;
-
   -fx-text-fill: #526b58;
-
   -fx-text-alignment: center;
 }
 
-/* ===============================
+/* =========================================================
    GET STARTED BUTTON
-   =============================== */
+   ========================================================= */
 
 .get-started-button {
   -fx-background-color: #1c6b43;
-
   -fx-text-fill: white;
-
   -fx-font-size: 16px;
-
   -fx-font-weight: bold;
-
   -fx-background-radius: 28;
-
   -fx-padding: 13px 32px;
-
   -fx-cursor: hand;
 }
 
 .get-started-button:hover {
   -fx-background-color: #145333;
-
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 12, 0, 0, 4);
 }
 
-/* ===============================
+.get-started-button:pressed {
+  -fx-background-color: #0d4027;
+}
+
+/* =========================================================
    LOGIN PAGE
-   =============================== */
+   ========================================================= */
 
 .login-page {
   -fx-background-color: linear-gradient(
@@ -143,47 +107,43 @@
 }
 
 .login-card {
-  -fx-background-color: rgba(255, 255, 255, 0.96);
-
+  -fx-background-color: rgba(255, 255, 255, 0.97);
   -fx-background-radius: 25;
-
   -fx-padding: 40;
-
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 25, 0, 0, 8);
 }
 
-/* ===============================
+/* =========================================================
    TEXT FIELDS
-   =============================== */
+   ========================================================= */
 
 .text-field,
 .password-field {
-  -fx-background-color: #f1f6f2;
-
+  -fx-background-color: #f5f9f6;
   -fx-border-color: #c8d8cc;
-
+  -fx-border-width: 1;
   -fx-border-radius: 10;
-
   -fx-background-radius: 10;
-
   -fx-padding: 10;
 }
 
-/* ===============================
+.text-field:focused,
+.password-field:focused {
+  -fx-background-color: white;
+  -fx-border-color: #43a047;
+  -fx-effect: dropshadow(gaussian, rgba(67, 160, 71, 0.15), 8, 0, 0, 2);
+}
+
+/* =========================================================
    LOGIN BUTTON
-   =============================== */
+   ========================================================= */
 
 .login-button {
   -fx-background-color: #176b45;
-
   -fx-text-fill: white;
-
   -fx-font-size: 16px;
-
   -fx-font-weight: bold;
-
   -fx-background-radius: 12;
-
   -fx-cursor: hand;
 }
 
@@ -191,46 +151,49 @@
   -fx-background-color: #125537;
 }
 
-/* ===============================
-   DASHBOARD
-   =============================== */
-/* ===============================
-AGRONOVA DASHBOARD
-=============================== */
-
-.dashboard {
-  -fx-background-color: #f3f7f3;
+.login-button:pressed {
+  -fx-background-color: #0b3d2e;
 }
 
-/* ===============================
-TOP BAR
-=============================== */
+/* =========================================================
+   AGRONOVA DASHBOARD
+   ========================================================= */
+
+.dashboard {
+  -fx-background-color: #eef5ef;
+}
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
 
 .top-bar {
-  -fx-background-color: linear-gradient(to right, #073b2a, #116b45, #238b50);
+  -fx-background-color: linear-gradient(to right, #063b29, #0d6842, #238b50);
 
   -fx-padding: 16 30 16 30;
 
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.22), 14, 0, 0, 4);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 16, 0, 0, 5);
 }
 
-/* ===============================
-SIDEBAR
-=============================== */
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
 
 .sidebar {
   -fx-background-color: #ffffff;
 
-  -fx-border-color: #dce8df;
+  -fx-border-color: #d8e6dc;
 
   -fx-border-width: 0 1 0 0;
 
-  -fx-padding: 28 16 20 16;
+  -fx-padding: 28 15 20 15;
+
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.06), 12, 0, 2, 0);
 }
 
-/* ===============================
-MENU TITLE
-=============================== */
+/* =========================================================
+   MENU TITLE
+   ========================================================= */
 
 .menu-title {
   -fx-font-family: "Arial";
@@ -241,12 +204,12 @@ MENU TITLE
 
   -fx-text-fill: #72917b;
 
-  -fx-padding: 0 0 8 8;
+  -fx-padding: 0 0 10 8;
 }
 
-/* ===============================
-MENU BUTTON
-=============================== */
+/* =========================================================
+   MENU BUTTON
+   ========================================================= */
 
 .menu-button {
   -fx-background-color: transparent;
@@ -284,69 +247,57 @@ MENU BUTTON
 
 .menu-button:pressed {
   -fx-background-color: #cce8d2;
+
+  -fx-text-fill: #0d5636;
 }
 
-/* ===============================
-LOGOUT BUTTON
-=============================== */
-
-.logout-button {
-  -fx-text-fill: #b44a4a;
-}
-
-.logout-button:hover {
-  -fx-background-color: #fff0f0;
-
-  -fx-text-fill: #a52f2f;
-}
-
-/* ===============================
-DASHBOARD CENTER
-=============================== */
+/* =========================================================
+   DASHBOARD CENTER
+   ========================================================= */
 
 .dashboard-center {
-  -fx-background-color: #f3f7f3;
+  -fx-background-color: #eef5ef;
 
   -fx-padding: 32 38 35 38;
 }
 
-/* ===============================
-WELCOME SECTION
-=============================== */
+/* =========================================================
+   DASHBOARD WELCOME SECTION
+   ========================================================= */
 
 .dashboard-welcome {
-  -fx-background-color: linear-gradient(to right, #e4f4e6, #f4faf4);
+  -fx-background-color: linear-gradient(to right, #dff1e1, #f7fbf7);
 
-  -fx-background-radius: 18;
+  -fx-background-radius: 20;
 
-  -fx-border-color: #d4e8d7;
+  -fx-border-color: #cfe4d2;
 
-  -fx-border-radius: 18;
+  -fx-border-radius: 20;
 
   -fx-border-width: 1;
 
-  -fx-padding: 20 24 20 24;
+  -fx-padding: 22 26 22 26;
 
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 10, 0, 0, 3);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 12, 0, 0, 4);
 }
 
-/* ===============================
-DASHBOARD TITLE
-=============================== */
+/* =========================================================
+   DASHBOARD TITLE
+   ========================================================= */
 
 .dashboard-title {
   -fx-font-family: "Arial";
 
-  -fx-font-size: 27px;
+  -fx-font-size: 28px;
 
   -fx-font-weight: bold;
 
   -fx-text-fill: #174f2e;
 }
 
-/* ===============================
-DASHBOARD SUBTITLE
-=============================== */
+/* =========================================================
+   DASHBOARD SUBTITLE
+   ========================================================= */
 
 .dashboard-subtitle {
   -fx-font-family: "Arial";
@@ -356,9 +307,9 @@ DASHBOARD SUBTITLE
   -fx-text-fill: #67806c;
 }
 
-/* ===============================
-SECTION TITLE
-=============================== */
+/* =========================================================
+   SECTION TITLES
+   ========================================================= */
 
 .section-title {
   -fx-font-family: "Arial";
@@ -372,47 +323,49 @@ SECTION TITLE
   -fx-padding: 4 0 0 2;
 }
 
-/* ===============================
-STATISTICS CARD
-=============================== */
+/* =========================================================
+   STATISTICS CARDS
+   ========================================================= */
 
 .stat-card {
   -fx-background-color: white;
 
-  -fx-background-radius: 16;
+  -fx-background-radius: 18;
 
-  -fx-border-color: #dce9de;
+  -fx-border-color: #d7e6da;
 
-  -fx-border-radius: 16;
+  -fx-border-radius: 18;
 
   -fx-border-width: 1;
 
   -fx-padding: 15 17 15 17;
 
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.09), 12, 0, 0, 4);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.09), 13, 0, 0, 4);
+
+  -fx-cursor: hand;
 }
 
 .stat-card:hover {
   -fx-background-color: #fafffa;
 
-  -fx-border-color: #79b982;
+  -fx-border-color: #69ad72;
 
-  -fx-translate-y: -4;
+  -fx-translate-y: -5;
 
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.17), 16, 0, 0, 6);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 18, 0, 0, 7);
 }
 
-/* ===============================
-STAT ICON
-=============================== */
+/* =========================================================
+   STAT ICON
+   ========================================================= */
 
 .stat-icon {
   -fx-font-size: 23px;
 }
 
-/* ===============================
-STAT TITLE
-=============================== */
+/* =========================================================
+   STAT TITLE
+   ========================================================= */
 
 .stat-title {
   -fx-font-family: "Arial";
@@ -424,9 +377,9 @@ STAT TITLE
   -fx-text-fill: #58705e;
 }
 
-/* ===============================
-STAT VALUE
-=============================== */
+/* =========================================================
+   STAT VALUE
+   ========================================================= */
 
 .stat-value {
   -fx-font-family: "Arial";
@@ -438,61 +391,55 @@ STAT VALUE
   -fx-text-fill: #176b45;
 }
 
-/* ===============================
-STAT DESCRIPTION
-=============================== */
-
-.stat-description {
-  -fx-font-family: "Arial";
-
-  -fx-font-size: 10px;
-
-  -fx-text-fill: #8a9b8d;
-}
-
-/* ===============================
-MANAGEMENT CARDS
-=============================== */
+/* =========================================================
+   MANAGEMENT CARDS
+   ========================================================= */
 
 .management-card {
   -fx-background-color: white;
 
-  -fx-background-radius: 16;
+  -fx-background-radius: 18;
 
-  -fx-border-color: #dce9de;
+  -fx-border-color: #d7e6da;
 
-  -fx-border-radius: 16;
+  -fx-border-radius: 18;
 
   -fx-border-width: 1;
 
-  -fx-padding: 17;
+  -fx-padding: 18;
 
   -fx-cursor: hand;
 
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 12, 0, 0, 4);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.08), 13, 0, 0, 4);
 }
 
 .management-card:hover {
   -fx-background-color: #f8fff9;
 
-  -fx-border-color: #66ad70;
+  -fx-border-color: #58a967;
 
-  -fx-translate-y: -4;
+  -fx-translate-y: -5;
 
-  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 17, 0, 0, 6);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.18), 18, 0, 0, 7);
 }
 
-/* ===============================
-MANAGEMENT ICON
-=============================== */
+.management-card:pressed {
+  -fx-background-color: #edf8ef;
+
+  -fx-translate-y: -2;
+}
+
+/* =========================================================
+   MANAGEMENT ICON
+   ========================================================= */
 
 .management-icon {
   -fx-font-size: 28px;
 }
 
-/* ===============================
-MANAGEMENT TITLE
-=============================== */
+/* =========================================================
+   MANAGEMENT TITLE
+   ========================================================= */
 
 .management-title {
   -fx-font-family: "Arial";
@@ -504,9 +451,9 @@ MANAGEMENT TITLE
   -fx-text-fill: #195a31;
 }
 
-/* ===============================
-MANAGEMENT DESCRIPTION
-=============================== */
+/* =========================================================
+   MANAGEMENT DESCRIPTION
+   ========================================================= */
 
 .management-description {
   -fx-font-family: "Arial";
@@ -516,9 +463,49 @@ MANAGEMENT DESCRIPTION
   -fx-text-fill: #708275;
 }
 
-/* ===============================
-BUTTON FOCUS FIX
-=============================== */
+/* =========================================================
+   DASHBOARD SCROLLBAR
+   ========================================================= */
+
+.dashboard-scroll {
+  -fx-background-color: transparent;
+
+  -fx-border-color: transparent;
+}
+
+.dashboard-scroll > .viewport {
+  -fx-background-color: #eef5ef;
+}
+
+.dashboard-scroll .scroll-bar:vertical {
+  -fx-background-color: transparent;
+
+  -fx-pref-width: 10;
+}
+
+.dashboard-scroll .scroll-bar:vertical .track {
+  -fx-background-color: #e1ebe3;
+
+  -fx-background-radius: 10;
+}
+
+.dashboard-scroll .scroll-bar:vertical .thumb {
+  -fx-background-color: #8bbd92;
+
+  -fx-background-radius: 10;
+}
+
+.dashboard-scroll .scroll-bar:vertical .thumb:hover {
+  -fx-background-color: #5fa66a;
+}
+
+.dashboard-scroll .scroll-bar:horizontal {
+  -fx-opacity: 0;
+}
+
+/* =========================================================
+   FOCUS FIX
+   ========================================================= */
 
 .button:focused {
   -fx-focus-color: transparent;
@@ -526,9 +513,9 @@ BUTTON FOCUS FIX
   -fx-faint-focus-color: transparent;
 }
 
-/* =================================
-   AGRONOVA SPLASH SCREEN
-   ================================= */
+/* =========================================================
+   SPLASH SCREEN
+   ========================================================= */
 
 .splash-page {
   -fx-background-color: linear-gradient(
@@ -539,21 +526,29 @@ BUTTON FOCUS FIX
   );
 }
 
-/* Decorative background circles */
+/* =========================================================
+   SPLASH DECORATION
+   ========================================================= */
 
 .splash-circle-light {
   -fx-fill: rgba(255, 255, 255, 0.06);
+
   -fx-translate-x: 430;
+
   -fx-translate-y: -250;
 }
 
 .splash-circle-dark {
   -fx-fill: rgba(0, 0, 0, 0.06);
+
   -fx-translate-x: -430;
+
   -fx-translate-y: 270;
 }
 
-/* Logo */
+/* =========================================================
+   SPLASH LOGO
+   ========================================================= */
 
 .logo-circle {
   -fx-fill: rgba(255, 255, 255, 0.15);
@@ -567,7 +562,9 @@ BUTTON FOCUS FIX
   -fx-font-size: 55px;
 }
 
-/* AgroNova title */
+/* =========================================================
+   SPLASH TITLE
+   ========================================================= */
 
 .splash-title {
   -fx-font-family: "Arial";
@@ -579,7 +576,9 @@ BUTTON FOCUS FIX
   -fx-text-fill: white;
 }
 
-/* Small heading */
+/* =========================================================
+   SPLASH TAGLINE
+   ========================================================= */
 
 .splash-tagline {
   -fx-font-family: "Arial";
@@ -593,7 +592,9 @@ BUTTON FOCUS FIX
   -fx-letter-spacing: 3px;
 }
 
-/* Main tagline */
+/* =========================================================
+   SPLASH DESCRIPTION
+   ========================================================= */
 
 .splash-description {
   -fx-font-family: "Arial";
@@ -607,7 +608,9 @@ BUTTON FOCUS FIX
   -fx-padding: 5 0 12 0;
 }
 
-/* Loading text */
+/* =========================================================
+   SPLASH LOADING
+   ========================================================= */
 
 .splash-loading {
   -fx-font-size: 12px;
@@ -615,7 +618,9 @@ BUTTON FOCUS FIX
   -fx-text-fill: #d2ead4;
 }
 
-/* Progress bar */
+/* =========================================================
+   SPLASH PROGRESS
+   ========================================================= */
 
 .splash-progress {
   -fx-accent: white;
