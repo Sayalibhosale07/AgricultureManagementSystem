@@ -100,15 +100,15 @@ public void show(Stage stage) {
         Font.font("Arial", 22)
     );
 
-    Label userText = new Label("Admin");
+  Label userText = new Label("User");
 
-    userText.setFont(
-        Font.font(
-            "Arial",
-            FontWeight.BOLD,
-            14
-        )
-    );
+userText.setFont(
+    Font.font(
+        "Arial",
+        FontWeight.BOLD,
+        14
+    )
+);
 
     userText.setTextFill(Color.WHITE);
 

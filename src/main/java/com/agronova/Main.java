@@ -654,85 +654,147 @@ getStarted.getStyleClass().add("get-started-button");
     );
 
 
-    // ================= LOGIN FUNCTIONALITY =================
+  // ================= LOGIN FUNCTIONALITY =================
 
-    login.setOnAction(event -> {
+login.setOnAction(event -> {
 
-        if (username.getText().isEmpty()
-                || password.getText().isEmpty()) {
+    if (username.getText().trim().isEmpty()
+            || password.getText().isEmpty()) {
+
+        subtitle.setText(
+            "Please enter username and password"
+        );
+
+        subtitle.setTextFill(Color.RED);
+
+        return;
+    }
+
+    try {
+
+        Firestore db =
+                FirestoreClient.getFirestore();
+
+        var documents =
+                db.collection("users")
+                        .whereEqualTo(
+                                "email",
+                                username.getText().trim()
+                        )
+                        .whereEqualTo(
+                                "password",
+                                password.getText()
+                        )
+                        .get()
+                        .get()
+                        .getDocuments();
+
+        // ================= LOGIN SUCCESS =================
+
+        if (!documents.isEmpty()) {
+
+            String role = "USER";
+
+            // Check the role from Firestore
+            for (var document : documents) {
+
+                String firestoreRole =
+                        document.getString("role");
+
+                if (firestoreRole != null) {
+
+                    firestoreRole =
+                            firestoreRole.trim();
+
+                    System.out.println(
+                            "Logged in user: "
+                            + document.getString("email")
+                            + " | Role: "
+                            + firestoreRole
+                    );
+
+                    if (
+                        "ADMIN".equalsIgnoreCase(
+                            firestoreRole
+                        )
+                    ) {
+
+                        role = "ADMIN";
+                        break;
+                    }
+                }
+            }
 
             subtitle.setText(
-                "Please enter username and password"
+                "Login successful! 🌱"
             );
 
-            subtitle.setTextFill(Color.RED);
+            subtitle.setTextFill(
+                Color.web("#176b45")
+            );
 
-            return;
-        }
+            // ================= ADMIN =================
 
+            if (
+                "ADMIN".equalsIgnoreCase(role)
+            ) {
 
-        try {
-
-            Firestore db = FirestoreClient.getFirestore();
-
-            var documents = db.collection("users")
-                    .whereEqualTo(
-                        "email",
-                        username.getText()
-                    )
-                    .whereEqualTo(
-                        "password",
-                        password.getText()
-                    )
-                    .get()
-                    .get()
-                    .getDocuments();
-
-
-            if (!documents.isEmpty()) {
-
-                subtitle.setText(
-                    "Login successful! 🌱"
+                System.out.println(
+                    "Opening ADMIN Dashboard..."
                 );
 
-                subtitle.setTextFill(
-                    Color.web("#176b45")
+                AdminDashboard adminDashboard =
+                        new AdminDashboard();
+
+                adminDashboard.show(
+                        stage,
+                        username.getText().trim()
                 );
-
-
-                Dashboard dashboard = new Dashboard();
-
-                dashboard.show(
-                    stage,
-                    username.getText()
-                );
-
-
-            } else {
-
-                subtitle.setText(
-                    "Invalid email or password"
-                );
-
-                subtitle.setTextFill(Color.RED);
 
             }
 
+            // ================= USER =================
 
-        } catch (Exception ex) {
+            else {
+
+                System.out.println(
+                    "Opening USER Dashboard..."
+                );
+
+                Dashboard dashboard =
+                        new Dashboard();
+
+                dashboard.show(
+                        stage,
+                        username.getText().trim()
+                );
+            }
+
+        } else {
 
             subtitle.setText(
-                "Login failed!"
+                "Invalid email or password"
             );
 
-            subtitle.setTextFill(Color.RED);
-
-            ex.printStackTrace();
-
+            subtitle.setTextFill(
+                Color.RED
+            );
         }
 
-    });
+    } catch (Exception ex) {
 
+        subtitle.setText(
+            "Login failed!"
+        );
+
+        subtitle.setTextFill(
+            Color.RED
+        );
+
+        ex.printStackTrace();
+    }
+});
+  
 
     // ================= ADD LOGIN COMPONENTS =================
 
